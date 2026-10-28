@@ -1,0 +1,80 @@
+---
+import Layout from "../layouts/Layout.astro";
+import HeroSlider from "../components/hero/HeroSlider";
+import { site, whatsappLink } from "../data/site";
+
+const features = [
+  {
+    title: "100% feita à mão",
+    text: "Cada capa é tecida ponto por ponto, com fio de algodão macio que não arranha a tela.",
+  },
+  {
+    title: "Sob medida",
+    text: "Kindle 11ª geração, Paperwhite, Colorsoft, Oasis ou Scribe: o tamanho é ajustado ao seu modelo.",
+  },
+  {
+    title: "Do seu jeito",
+    text: "Escolha cores, aplicações, botão ou alça. Dá até para bordar uma inicial.",
+  },
+];
+
+const steps = [
+  { n: "01", title: "Escolha o modelo", text: "Diga qual é o seu Kindle para a capa ficar no tamanho certinho." },
+  { n: "02", title: "Monte o visual", text: "Cores, florzinhas, bolsinho, alça. A gente conversa e define tudo junto." },
+  { n: "03", title: "Receba em casa", text: "Produção em até 7 dias úteis e envio para todo o Brasil." },
+];
+---
+
+<Layout>
+  <HeroSlider client:load />
+
+  <main>
+    <section id="feito-a-mao" class="mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-32">
+      <p class="text-terracotta text-sm font-semibold tracking-[0.2em] uppercase">Feito à mão</p>
+      <h2 class="font-display mt-3 max-w-2xl text-4xl leading-tight font-black md:text-6xl">
+        Um abraço quentinho para o seu Kindle.
+      </h2>
+      <div class="mt-14 grid gap-6 md:grid-cols-3">
+        {
+          features.map((f) => (
+            <article class="rounded-3xl bg-white p-8 shadow-[0_10px_40px_-20px_rgb(43_29_23/0.25)]">
+              <h3 class="font-display text-2xl font-bold">{f.title}</h3>
+              <p class="mt-3 leading-relaxed opacity-75">{f.text}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section id="como-encomendar" class="bg-ink text-cream">
+      <div class="mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-32">
+        <p class="text-sm font-semibold tracking-[0.2em] text-[#f4a3b8] uppercase">Como encomendar</p>
+        <h2 class="font-display mt-3 text-4xl font-black md:text-6xl">Três passos e pronto.</h2>
+        <ol class="mt-14 grid gap-10 md:grid-cols-3">
+          {
+            steps.map((s) => (
+              <li class="border-t border-white/20 pt-6">
+                <span class="font-display text-5xl font-black text-[#f4a3b8]">{s.n}</span>
+                <h3 class="mt-4 text-xl font-bold">{s.title}</h3>
+                <p class="mt-2 leading-relaxed opacity-70">{s.text}</p>
+              </li>
+            ))
+          }
+        </ol>
+        <a
+          href={whatsappLink("Olá! Quero encomendar uma capa de Kindle personalizada.")}
+          target="_blank"
+          rel="noreferrer"
+          class="bg-terracotta mt-16 inline-block rounded-full px-8 py-4 font-semibold text-white transition-transform hover:scale-105"
+        >
+          Pedir a minha pelo WhatsApp
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 py-10 text-sm opacity-70 md:flex-row md:px-10">
+    <span class="font-display text-lg font-black">{site.brand}</span>
+    <span>Capas de Kindle em crochê, feitas com carinho.</span>
+  </footer>
+</Layout>
