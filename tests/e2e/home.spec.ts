@@ -80,19 +80,21 @@ test.describe("desktop", () => {
     await expect(heading(page)).toHaveText(first.name);
   });
 
-  test("o scroll troca de capa e libera a página na última", async ({ page }) => {
+  test("o scroll vertical rola a página sem trocar de capa", async ({ page }) => {
     const box = (await hero(page).boundingBox())!;
     await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
 
-    await page.mouse.wheel(0, 120);
-    await expect(heading(page)).toHaveText(second.name);
-    expect(await page.evaluate(() => window.scrollY)).toBe(0);
-
-    await page.getByRole("tab", { name: last.name }).click();
-    await expect(heading(page)).toHaveText(last.name);
     await page.mouse.wheel(0, 400);
     await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(0);
-    await expect(heading(page)).toHaveText(last.name);
+    await expect(heading(page)).toHaveText(first.name);
+  });
+
+  test("o swipe horizontal troca de capa", async ({ page }) => {
+    const box = (await hero(page).boundingBox())!;
+    await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+
+    await page.mouse.wheel(120, 0);
+    await expect(heading(page)).toHaveText(second.name);
   });
 
   test("o menu leva às seções da página", async ({ page }) => {

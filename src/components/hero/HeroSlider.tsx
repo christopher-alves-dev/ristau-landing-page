@@ -108,18 +108,16 @@ export default function HeroSlider() {
     return () => window.removeEventListener("keydown", onKey);
   }, [paginate]);
 
-  // Scroll troca de capa enquanto a hero está fixa no topo; nas pontas, libera o scroll da página.
+  // Só o swipe horizontal do trackpad troca de capa; o scroll vertical fica livre para a página.
   // Cada gesto (incluindo a inércia do trackpad) conta como uma troca só.
   useEffect(() => {
     const el = heroRef.current;
     if (!el) return;
     const onWheel = (e: WheelEvent) => {
-      const delta = Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
-      if (Math.abs(delta) < 4) return;
-      const dir = delta > 0 ? 1 : -1;
+      if (Math.abs(e.deltaX) <= Math.abs(e.deltaY) || Math.abs(e.deltaX) < 4) return;
+      const dir = e.deltaX > 0 ? 1 : -1;
       const next = indexRef.current + dir;
       if (next < 0 || next >= products.length) return;
-      if (Math.abs(el.getBoundingClientRect().top) > 4) return;
 
       e.preventDefault();
       const now = performance.now();
