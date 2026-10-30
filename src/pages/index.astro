@@ -75,6 +75,9 @@ const steps = [
 
   <footer class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 py-10 text-sm md:flex-row md:px-10">
     <img src={site.logo} alt={site.brand} width="94" height="80" class="h-20 w-auto" />
-    <span class="opacity-70">Capas de Kindle em crochê, feitas com carinho.</span>
+    <div class="flex flex-col items-center gap-1 text-center opacity-70 md:items-end md:text-right">
+      <span>Capas de Kindle em crochê, feitas com carinho.</span>
+      <small>© {new Date().getFullYear()} {site.brand}. Todos os direitos reservados.</small>
+    </div>
   </footer>
 </Layout>
