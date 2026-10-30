@@ -1,5 +1,6 @@
 export const site = {
-  brand: "Fio & Folha",
+  brand: "Ristau",
+  logo: "/logo.webp",
   whatsapp: "5500000000000",
   instagram: "https://instagram.com/",
 };

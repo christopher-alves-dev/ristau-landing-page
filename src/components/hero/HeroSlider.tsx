@@ -188,8 +188,8 @@ export default function HeroSlider() {
       <Decorations mx={smx} my={smy} index={index} color={product.colors.accent} />
 
       <header className="absolute inset-x-0 top-0 z-10 mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-5 md:px-10 md:py-7">
-        <a href="/" className="font-display text-2xl font-black">
-          {site.brand}
+        <a href="/" className="-my-2 block">
+          <img src={site.logo} alt={site.brand} width={94} height={80} className="h-16 w-auto md:h-20" />
         </a>
         <nav className="hidden items-center gap-8 text-sm font-semibold md:flex">
           <a href="#feito-a-mao" className="hover:opacity-70">Feito à mão</a>
