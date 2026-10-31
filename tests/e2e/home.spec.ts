@@ -65,7 +65,7 @@ test("o botão de compra leva ao WhatsApp com a capa escolhida", async ({ page }
 });
 
 test("mostra as seções e o link final do WhatsApp", async ({ page }) => {
-  await expect(page.getByRole("heading", { name: "Um abraço quentinho para o seu Kindle." })).toBeAttached();
+  await expect(page.getByRole("heading", { name: "Seu Kindle protegido e de roupa nova." })).toBeAttached();
   await expect(page.getByRole("heading", { name: "Três passos e pronto." })).toBeAttached();
   await expect(page.getByRole("link", { name: "Pedir a minha pelo WhatsApp" })).toHaveAttribute("href", /^https:\/\/wa\.me\//);
 });
