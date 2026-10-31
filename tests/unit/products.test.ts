@@ -17,7 +17,7 @@ describe("products", () => {
 
   describe.each(products)("$id", (product) => {
     it("tem todos os textos preenchidos", () => {
-      for (const field of ["name", "word", "tagline", "description"] as const) {
+      for (const field of ["name", "word", "description"] as const) {
         expect(product[field].trim()).not.toBe("");
       }
     });

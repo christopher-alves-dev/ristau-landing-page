@@ -218,11 +218,9 @@ export default function HeroSlider() {
 
       <div className="mx-auto grid w-full max-w-7xl flex-1 grid-cols-1 items-center gap-6 px-6 pt-24 pb-36 md:grid-cols-[1fr_1.1fr] md:gap-10 md:px-10 md:pb-32">
         <div className="relative order-2 min-h-56 md:order-1" aria-live="polite">
+          <p className="text-sm font-semibold tracking-[0.2em] uppercase opacity-70">{site.slogan}</p>
           <AnimatePresence mode="wait" initial={false}>
             <motion.div key={product.id} variants={textContainer} initial="enter" animate="center" exit="exit">
-              <motion.p variants={textItem} className="text-sm font-semibold tracking-[0.2em] uppercase opacity-70">
-                {product.tagline}
-              </motion.p>
               <motion.h1 variants={textItem} className="font-display mt-3 text-5xl leading-[0.95] font-black md:text-7xl">
                 {product.name}
               </motion.h1>
