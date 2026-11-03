@@ -77,4 +77,22 @@ export const products: Product[] = [
     image: "/capas/fotos/pastel-couro.webp",
     colors: { bg: "#fbdcea", blob: "#f3a5c8", accent: "#c2477f", ink: "#45152c" },
   },
+  {
+    id: "poa",
+    name: "Poá Preto e Branco",
+    word: "Poá",
+    description: "Fio de bolinhas em faixas preta e off-white, com etiqueta de couro.",
+    price: "R$ 89",
+    image: "/capas/fotos/poa.webp",
+    colors: { bg: "#ece8e1", blob: "#c9c2b6", accent: "#2b2b2b", ink: "#161616" },
+  },
+  {
+    id: "taupe",
+    name: "Taupe com Laço",
+    word: "Taupe",
+    description: "Fio taupe salpicado de branco, com cordão de laço, ponteiras pretas e inicial prateada.",
+    price: "R$ 89",
+    image: "/capas/fotos/taupe.webp",
+    colors: { bg: "#efe2da", blob: "#c9a594", accent: "#7d4f3d", ink: "#33201a" },
+  },
 ];
