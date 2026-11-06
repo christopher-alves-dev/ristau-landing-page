@@ -53,6 +53,7 @@ function Floating({ item, mx, my, index, color }: Props & { item: (typeof items)
   return (
     <motion.div className={`absolute ${item.className}`} style={{ x, y }}>
       <motion.div
+        initial={false}
         animate={{ rotate: index * 90 * item.spin, color, scale: [1, 1.15, 1] }}
         transition={{ type: "spring", stiffness: 60, damping: 14, scale: { duration: 0.6 } }}
         style={{ opacity: 0.55 }}

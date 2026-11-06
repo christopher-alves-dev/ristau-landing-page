@@ -96,3 +96,5 @@ export const products: Product[] = [
     colors: { bg: "#efe2da", blob: "#c9a594", accent: "#7d4f3d", ink: "#33201a" },
   },
 ];
+
+export const thumbnailOf = (product: Product) => product.image.replace("/capas/fotos/", "/capas/fotos/thumbs/");

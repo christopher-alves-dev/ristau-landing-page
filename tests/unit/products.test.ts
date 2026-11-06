@@ -1,7 +1,7 @@
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
-import { products } from "../../src/data/products";
+import { products, thumbnailOf } from "../../src/data/products";
 
 const HEX = /^#[0-9a-f]{6}$/i;
 
@@ -33,6 +33,10 @@ describe("products", () => {
     it("usa uma imagem webp que existe em public/", () => {
       expect(product.image).toMatch(/^\/capas\/fotos\/[\w-]+\.webp$/);
       expect(existsSync(join(process.cwd(), "public", product.image))).toBe(true);
+    });
+
+    it("tem miniatura gerada (npm run thumbs)", () => {
+      expect(existsSync(join(process.cwd(), "public", thumbnailOf(product)))).toBe(true);
     });
   });
 });

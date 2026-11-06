@@ -9,7 +9,7 @@ import {
   type Variants,
 } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { products } from "../../data/products";
+import { products, thumbnailOf } from "../../data/products";
 import { site, whatsappLink } from "../../data/site";
 import Decorations from "./Decorations";
 
@@ -56,7 +56,7 @@ export default function HeroSlider() {
   const [[index, direction], setSlide] = useState<[number, number]>([0, 0]);
   const indexRef = useRef(0);
   const heroRef = useRef<HTMLElement>(null);
-  const lastWheel = useRef(0);
+  const lastWheel = useRef(-Infinity);
   const thumbsRef = useRef<HTMLDivElement>(null);
   const reduceMotion = useReducedMotion();
 
@@ -139,6 +139,7 @@ export default function HeroSlider() {
     <motion.section
       ref={heroRef}
       onPointerMove={onPointerMove}
+      initial={false}
       animate={{ backgroundColor: product.colors.bg, color: product.colors.ink }}
       transition={{ duration: 0.8, ease: "easeInOut" }}
       className="relative isolate flex min-h-svh flex-col overflow-hidden"
@@ -148,6 +149,7 @@ export default function HeroSlider() {
       <motion.div
         aria-hidden
         className="absolute -left-[10%] -top-[20%] -z-10 size-[70vmax] rounded-full blur-3xl"
+        initial={false}
         animate={{ backgroundColor: product.colors.blob }}
         transition={{ duration: 1 }}
         style={{ x: blobX, y: blobY, opacity: 0.55 }}
@@ -155,6 +157,7 @@ export default function HeroSlider() {
       <motion.div
         aria-hidden
         className="absolute -bottom-[30%] -right-[10%] -z-10 size-[60vmax] rounded-full blur-3xl"
+        initial={false}
         animate={{ backgroundColor: product.colors.accent }}
         transition={{ duration: 1 }}
         style={{ x: blob2X, y: blob2Y, opacity: 0.18 }}
@@ -292,7 +295,7 @@ export default function HeroSlider() {
               onClick={() => goTo(i, i > index ? 1 : -1)}
               className="relative size-12 shrink-0 rounded-2xl bg-white/40 p-1.5 backdrop-blur transition-transform hover:scale-110 sm:size-14 md:size-16"
             >
-              <img src={p.image} alt="" className="h-full w-full object-contain" />
+              <img src={thumbnailOf(p)} alt="" className="h-full w-full object-contain" />
               {i === index && (
                 <motion.span
                   layoutId="thumb-ring"
