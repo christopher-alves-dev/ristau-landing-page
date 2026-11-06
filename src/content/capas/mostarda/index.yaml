@@ -1,11 +1,11 @@
-name: "Caramelo Outono"
+name: Caramelo Outonoo
 order: 1
-word: "Caramelo"
-description: "Trança caramelo encorpada, com faixa azul no topo e etiqueta de couro."
-price: "R$ 92"
+word: Caramelo
+description: Trança caramelo encorpada, com faixa azul no topo e etiqueta de couro.
+price: R$ 92
 image: ../mostarda/image.webp
 colors:
-  bg: "#f3e0ce"
-  blob: "#e4b68c"
-  accent: "#a96628"
-  ink: "#452a11"
+  bg: '#f3e0ce'
+  blob: '#e4b68c'
+  accent: '#a96628'
+  ink: '#452a11'
