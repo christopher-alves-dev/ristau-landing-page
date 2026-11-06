@@ -17,7 +17,7 @@ export default defineConfig({
     { name: "mobile", use: { ...devices["Pixel 7"] } },
   ],
   webServer: {
-    command: `npm run build && npm run preview -- --port ${PORT} --ignore-lock`,
+    command: `npm run build && vite preview --outDir .vercel/output/static --port ${PORT} --strictPort`,
     url: `http://localhost:${PORT}`,
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,

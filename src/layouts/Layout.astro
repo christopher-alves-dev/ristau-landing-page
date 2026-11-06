@@ -1,16 +1,12 @@
 ---
 import "../styles/global.css";
-import { site } from "../data/site";
 
 interface Props {
-  title?: string;
-  description?: string;
+  title: string;
+  description: string;
 }
 
-const {
-  title = `${site.brand} · Capas de Kindle em crochê`,
-  description = "Capas de Kindle feitas à mão em crochê, personalizadas nas cores e no tamanho do seu modelo.",
-} = Astro.props;
+const { title, description } = Astro.props;
 ---
 
 <!doctype html>

@@ -1,10 +1,12 @@
-export const site = {
-  brand: "Ristau",
-  logo: "/logo.webp",
-  slogan: "Suas histórias favoritas e bem guardadas",
-  whatsapp: "5500000000000",
-  instagram: "https://instagram.com/",
+export type Site = {
+  brand: string;
+  logo: string;
+  slogan: string;
+  whatsapp: string;
+  instagram: string;
 };
 
-export const whatsappLink = (message: string) =>
-  `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(message)}`;
+export const LOGO = "/logo.webp";
+
+export const whatsappLink = (phone: string, message: string) =>
+  `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;

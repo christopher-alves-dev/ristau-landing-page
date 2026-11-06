@@ -9,8 +9,8 @@ import {
   type Variants,
 } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { products, thumbnailOf } from "../../data/products";
-import { site, whatsappLink } from "../../data/site";
+import type { Product } from "../../data/products";
+import { whatsappLink, type Site } from "../../data/site";
 import Decorations from "./Decorations";
 
 const SWIPE_THRESHOLD = 80;
@@ -52,7 +52,9 @@ const textItem: Variants = {
   exit: { y: -20, opacity: 0, transition: { duration: 0.25 } },
 };
 
-export default function HeroSlider() {
+type Props = { products: Product[]; site: Site };
+
+export default function HeroSlider({ products, site }: Props) {
   const [[index, direction], setSlide] = useState<[number, number]>([0, 0]);
   const indexRef = useRef(0);
   const heroRef = useRef<HTMLElement>(null);
@@ -66,7 +68,7 @@ export default function HeroSlider() {
   const goTo = useCallback((next: number, dir: number) => {
     const wrapped = (next + products.length) % products.length;
     if (wrapped !== indexRef.current) setSlide([wrapped, dir]);
-  }, []);
+  }, [products.length]);
   const paginate = useCallback((dir: number) => goTo(indexRef.current + dir, dir), [goTo]);
 
   const mx = useMotionValue(0);
@@ -127,7 +129,7 @@ export default function HeroSlider() {
     };
     el.addEventListener("wheel", onWheel, { passive: false });
     return () => el.removeEventListener("wheel", onWheel);
-  }, [goTo]);
+  }, [goTo, products.length]);
 
   const onDragEnd = (_: unknown, info: PanInfo) => {
     const power = info.offset.x + info.velocity.x * 0.2;
@@ -232,7 +234,7 @@ export default function HeroSlider() {
               </motion.p>
               <motion.div variants={textItem} className="mt-8 flex flex-wrap items-center gap-5">
                 <a
-                  href={whatsappLink(`Olá! Quero encomendar a capa ${product.name} para o meu Kindle.`)}
+                  href={whatsappLink(site.whatsapp, `Olá! Quero encomendar a capa ${product.name} para o meu Kindle.`)}
                   target="_blank"
                   rel="noreferrer"
                   className="rounded-full px-7 py-4 font-semibold text-white shadow-lg transition-transform hover:scale-105 active:scale-95"
@@ -295,7 +297,7 @@ export default function HeroSlider() {
               onClick={() => goTo(i, i > index ? 1 : -1)}
               className="relative size-12 shrink-0 rounded-2xl bg-white/40 p-1.5 backdrop-blur transition-transform hover:scale-110 sm:size-14 md:size-16"
             >
-              <img src={thumbnailOf(p)} alt="" className="h-full w-full object-contain" />
+              <img src={p.thumb} alt="" className="h-full w-full object-contain" />
               {i === index && (
                 <motion.span
                   layoutId="thumb-ring"

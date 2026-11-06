@@ -1,0 +1,30 @@
+features:
+  eyebrow: Capa Kindle
+  title: Seu Kindle protegido e de roupa nova.
+  cards:
+    - title: 100% feita à mão
+      subtitle: Produzida em crochê, ponto a ponto
+      text: ""
+      items:
+        - Fio de malha premium
+        - Cartela com mais de 70 cores
+    - title: Sob medida
+      subtitle: ""
+      text: "Kindle 11ª geração, Paperwhite, Colorsoft, Oasis ou Scribe: o tamanho é ajustado ao seu modelo."
+      items: []
+    - title: Do seu jeito
+      subtitle: ""
+      text: "Personalize sua capa Kindle com itens adicionais: alça de mão, inicial do seu nome, laço com ponteiras, chaveiro tassel com pingente."
+      items: []
+steps:
+  eyebrow: Como encomendar
+  title: Três passos e pronto.
+  items:
+    - title: Escolha o modelo
+      text: Diga qual é o seu Kindle para a capa ficar no tamanho certinho.
+    - title: Monte o visual
+      text: Cores, florzinhas, bolsinho, alça. A gente conversa e define tudo junto.
+    - title: Receba em casa
+      text: Produção em até 7 dias úteis e envio para todo o Brasil.
+  cta: Pedir a minha pelo WhatsApp
+  ctaMessage: Olá! Quero encomendar uma capa de Kindle personalizada.

@@ -1,0 +1,11 @@
+name: "Terra e Mar"
+order: 3
+word: "Terra"
+description: "Faixas em cru, caramelo, bege com poá, cacau e azul, com pingente de franjas e inicial."
+price: "R$ 89"
+image: ../terra-mar/image.webp
+colors:
+  bg: "#e8ded9"
+  blob: "#cab1a6"
+  accent: "#906956"
+  ink: "#362820"

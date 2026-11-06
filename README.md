@@ -1,43 +1,32 @@
-# Astro Starter Kit: Minimal
+# Ristau · Landing page
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Landing page das capas de Kindle em crochê da Ristau, feita com Astro + React e hospedada na Vercel.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Comandos
 
-## 🚀 Project Structure
+| Comando            | O que faz                                        |
+| :----------------- | :----------------------------------------------- |
+| `npm run dev`      | Servidor local em `localhost:4321`               |
+| `npm run build`    | Build de produção (saída em `.vercel/output`)    |
+| `npm test`         | Testes unitários (Vitest)                        |
+| `npm run test:e2e` | Testes e2e (Playwright) sobre o build            |
 
-Inside of your Astro project, you'll see the following folders and files:
+## Conteúdo editável (Keystatic)
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+Textos, capas e fotos ficam em `src/content/` e são editados pelo painel em `/admin` (ou `/keystatic`).
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+- `src/content/capas/<slug>/index.yaml` + `image.(png|webp)`: uma pasta por capa
+- `src/content/site.yaml`: marca, slogan, WhatsApp, Instagram, SEO e rodapé
+- `src/content/home.yaml`: seções "Feito à mão" e "Como encomendar"
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+Fotos: só PNG ou WebP com fundo transparente, até 3 MB (o painel bloqueia o resto). A foto da hero (800px de largura) e a miniatura (160px de altura) são geradas em WebP no build, então não é preciso otimizar nada à mão.
 
-Any static assets, like images, can be placed in the `public/` directory.
+Em desenvolvimento o painel grava direto nos arquivos locais. Em produção, cada "Save" vira um commit no GitHub e a Vercel publica de novo.
 
-## 🧞 Commands
+### Ativar o painel em produção (uma vez só)
 
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+1. Mude temporariamente o `storage` em `keystatic.config.tsx` para `{ kind: "github", repo: ... }` e rode `npm run dev`.
+2. Abra `http://127.0.0.1:4321/keystatic` e siga o assistente para criar o GitHub App. Ele grava no `.env` as variáveis `KEYSTATIC_GITHUB_CLIENT_ID`, `KEYSTATIC_GITHUB_CLIENT_SECRET`, `KEYSTATIC_SECRET` e `PUBLIC_KEYSTATIC_GITHUB_APP_SLUG`.
+3. Desfaça a mudança do passo 1 e cadastre as quatro variáveis na Vercel (Settings → Environment Variables).
+4. No GitHub App, adicione a URL de callback do domínio de produção: `https://<domínio>/api/keystatic/github/oauth/callback`.
+5. Quem for editar precisa de uma conta no GitHub com acesso de escrita ao repositório.
