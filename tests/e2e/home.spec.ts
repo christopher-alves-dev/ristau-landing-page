@@ -7,8 +7,10 @@ const heading = (page: Page) => page.getByRole("heading", { level: 1 });
 const hero = (page: Page) => page.getByRole("region", { name: "Capas de Kindle em crochê" });
 
 test.beforeEach(async ({ page }) => {
-  // O script do Vercel Analytics só existe no deploy da Vercel.
-  await page.route("**/_vercel/insights/**", (route) => route.fulfill({ contentType: "text/javascript", body: "" }));
+  // Os scripts do Vercel Analytics e do Speed Insights só existem no deploy da Vercel.
+  await page.route(/\/_vercel\/(insights|speed-insights)\//, (route) =>
+    route.fulfill({ contentType: "text/javascript", body: "" }),
+  );
   await page.goto("/");
   await expect(page.locator("astro-island")).not.toHaveAttribute("ssr");
   const names = await page.getByRole("tab").evaluateAll((tabs) => tabs.map((t) => t.getAttribute("aria-label")!));
