@@ -21,6 +21,8 @@ Textos, capas e fotos ficam em `src/content/` e são editados pelo painel em `/a
 
 Fotos: só PNG ou WebP com fundo transparente, até 3 MB (o painel bloqueia o resto). A foto da hero (800px de largura) e a miniatura (160px de altura) são geradas em WebP no build, então não é preciso otimizar nada à mão.
 
+Ao editar uma capa, as seções ou as informações do site, uma prévia ao vivo no canto da tela mostra como a página vai ficar, no computador ou no celular, e rola até a parte que está sendo editada. A prévia é a página `/preview`, que usa os mesmos componentes do site. As cores têm seletor e o preço tem máscara em reais. Os campos personalizados ficam em `src/admin/`.
+
 Em desenvolvimento o painel grava direto nos arquivos locais. Em produção, cada "Save" vira um commit no GitHub e a Vercel publica de novo.
 
 ### Ativar o painel em produção (uma vez só)

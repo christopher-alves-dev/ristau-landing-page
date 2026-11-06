@@ -1,0 +1,11 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PagePreview from "../components/preview/PagePreview";
+import { loadHome, loadProducts, loadSite } from "../data/content";
+
+const [products, site, home] = await Promise.all([loadProducts(), loadSite(), loadHome()]);
+---
+
+<Layout title="Prévia" description="Prévia do painel" noindex>
+  <PagePreview client:load products={products} site={site} home={home} />
+</Layout>

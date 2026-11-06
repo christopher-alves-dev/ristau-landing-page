@@ -1,6 +1,7 @@
 import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
+import { PRICE_REGEX } from "./data/price";
 
 const hex = z.string().regex(/^#[0-9a-f]{6}$/i);
 const single = (name: string) => glob({ pattern: `${name}.yaml`, base: "src/content" });
@@ -17,7 +18,7 @@ const capas = defineCollection({
       order: z.number().int(),
       word: z.string().min(1),
       description: z.string().min(1),
-      price: z.string().regex(/^R\$ \d+(,\d{2})?$/),
+      price: z.string().regex(PRICE_REGEX),
       image: image(),
       colors: z.object({ bg: hex, blob: hex, accent: hex, ink: hex }),
     }),
