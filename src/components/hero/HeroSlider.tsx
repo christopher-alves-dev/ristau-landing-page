@@ -9,7 +9,7 @@ import {
   type Variants,
 } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { products } from "../../data/products";
+import { products, thumbnailOf } from "../../data/products";
 import { site, whatsappLink } from "../../data/site";
 import Decorations from "./Decorations";
 
@@ -56,7 +56,7 @@ export default function HeroSlider() {
   const [[index, direction], setSlide] = useState<[number, number]>([0, 0]);
   const indexRef = useRef(0);
   const heroRef = useRef<HTMLElement>(null);
-  const lastWheel = useRef(0);
+  const lastWheel = useRef(-Infinity);
   const thumbsRef = useRef<HTMLDivElement>(null);
   const reduceMotion = useReducedMotion();
 
@@ -108,18 +108,16 @@ export default function HeroSlider() {
     return () => window.removeEventListener("keydown", onKey);
   }, [paginate]);
 
-  // Scroll troca de capa enquanto a hero está fixa no topo; nas pontas, libera o scroll da página.
+  // Só o swipe horizontal do trackpad troca de capa; o scroll vertical fica livre para a página.
   // Cada gesto (incluindo a inércia do trackpad) conta como uma troca só.
   useEffect(() => {
     const el = heroRef.current;
     if (!el) return;
     const onWheel = (e: WheelEvent) => {
-      const delta = Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
-      if (Math.abs(delta) < 4) return;
-      const dir = delta > 0 ? 1 : -1;
+      if (Math.abs(e.deltaX) <= Math.abs(e.deltaY) || Math.abs(e.deltaX) < 4) return;
+      const dir = e.deltaX > 0 ? 1 : -1;
       const next = indexRef.current + dir;
       if (next < 0 || next >= products.length) return;
-      if (Math.abs(el.getBoundingClientRect().top) > 4) return;
 
       e.preventDefault();
       const now = performance.now();
@@ -141,6 +139,7 @@ export default function HeroSlider() {
     <motion.section
       ref={heroRef}
       onPointerMove={onPointerMove}
+      initial={false}
       animate={{ backgroundColor: product.colors.bg, color: product.colors.ink }}
       transition={{ duration: 0.8, ease: "easeInOut" }}
       className="relative isolate flex min-h-svh flex-col overflow-hidden"
@@ -150,6 +149,7 @@ export default function HeroSlider() {
       <motion.div
         aria-hidden
         className="absolute -left-[10%] -top-[20%] -z-10 size-[70vmax] rounded-full blur-3xl"
+        initial={false}
         animate={{ backgroundColor: product.colors.blob }}
         transition={{ duration: 1 }}
         style={{ x: blobX, y: blobY, opacity: 0.55 }}
@@ -157,6 +157,7 @@ export default function HeroSlider() {
       <motion.div
         aria-hidden
         className="absolute -bottom-[30%] -right-[10%] -z-10 size-[60vmax] rounded-full blur-3xl"
+        initial={false}
         animate={{ backgroundColor: product.colors.accent }}
         transition={{ duration: 1 }}
         style={{ x: blob2X, y: blob2Y, opacity: 0.18 }}
@@ -188,8 +189,8 @@ export default function HeroSlider() {
       <Decorations mx={smx} my={smy} index={index} color={product.colors.accent} />
 
       <header className="absolute inset-x-0 top-0 z-10 mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-5 md:px-10 md:py-7">
-        <a href="/" className="font-display text-2xl font-black">
-          {site.brand}
+        <a href="/" className="-my-2 block">
+          <img src={site.logo} alt={site.brand} width={94} height={80} className="h-16 w-auto md:h-20" />
         </a>
         <nav className="hidden items-center gap-8 text-sm font-semibold md:flex">
           <a href="#feito-a-mao" className="hover:opacity-70">Feito à mão</a>
@@ -220,11 +221,9 @@ export default function HeroSlider() {
 
       <div className="mx-auto grid w-full max-w-7xl flex-1 grid-cols-1 items-center gap-6 px-6 pt-24 pb-36 md:grid-cols-[1fr_1.1fr] md:gap-10 md:px-10 md:pb-32">
         <div className="relative order-2 min-h-56 md:order-1" aria-live="polite">
+          <p className="text-sm font-semibold tracking-[0.2em] uppercase opacity-70">{site.slogan}</p>
           <AnimatePresence mode="wait" initial={false}>
             <motion.div key={product.id} variants={textContainer} initial="enter" animate="center" exit="exit">
-              <motion.p variants={textItem} className="text-sm font-semibold tracking-[0.2em] uppercase opacity-70">
-                {product.tagline}
-              </motion.p>
               <motion.h1 variants={textItem} className="font-display mt-3 text-5xl leading-[0.95] font-black md:text-7xl">
                 {product.name}
               </motion.h1>
@@ -296,7 +295,7 @@ export default function HeroSlider() {
               onClick={() => goTo(i, i > index ? 1 : -1)}
               className="relative size-12 shrink-0 rounded-2xl bg-white/40 p-1.5 backdrop-blur transition-transform hover:scale-110 sm:size-14 md:size-16"
             >
-              <img src={p.image} alt="" className="h-full w-full object-contain" />
+              <img src={thumbnailOf(p)} alt="" className="h-full w-full object-contain" />
               {i === index && (
                 <motion.span
                   layoutId="thumb-ring"
