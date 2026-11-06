@@ -46,12 +46,15 @@ export function previewProducts(draft: CapaDraft, products: Product[]): Product[
   ];
 }
 
-export type SiteDraft = Partial<Pick<Site, "brand" | "slogan" | "whatsapp" | "instagram" | "footerText">>;
+export type SiteDraft = Partial<Pick<Site, "brand" | "slogan" | "whatsapp" | "instagram" | "tiktok" | "footerText">>;
 export type Draft = { capa?: CapaDraft; site?: SiteDraft; home?: Partial<Home> };
 export type Section = "topo" | "feito-a-mao" | "como-encomendar" | "rodape";
 
+const OPTIONAL: (keyof SiteDraft)[] = ["tiktok"];
+
 export function previewSite(draft: SiteDraft | undefined, site: Site): Site {
-  const filled = Object.entries(draft ?? {}).filter(([, value]) => value);
+  // Campo obrigatório vazio é só digitação em andamento; opcional vazio esconde o link.
+  const filled = Object.entries(draft ?? {}).filter(([key, value]) => value || OPTIONAL.includes(key as keyof SiteDraft));
   return { ...site, ...Object.fromEntries(filled) };
 }
 
@@ -62,6 +65,7 @@ export function previewHome(draft: Partial<Home> | undefined, home: Home): Home 
 const SITE_SECTION: Record<keyof SiteDraft, Section | null> = {
   slogan: "topo",
   instagram: "topo",
+  tiktok: "topo",
   brand: "rodape",
   footerText: "rodape",
   whatsapp: null,

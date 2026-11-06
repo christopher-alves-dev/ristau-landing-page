@@ -73,3 +73,15 @@ describe("HeroSlider", () => {
     expect(text).toContain(first.name);
   });
 });
+
+describe("HeroSlider · redes sociais", () => {
+  it("mostra o TikTok só quando ele está preenchido", () => {
+    const { unmount } = render(<HeroSlider products={products} site={site} />);
+    expect(screen.queryByRole("link", { name: "TikTok" })).not.toBeInTheDocument();
+    unmount();
+
+    render(<HeroSlider products={products} site={{ ...site, tiktok: "https://www.tiktok.com/@ristau" }} />);
+    expect(screen.getByRole("link", { name: "TikTok" })).toHaveAttribute("href", "https://www.tiktok.com/@ristau");
+    expect(screen.getByRole("link", { name: "Instagram" })).toHaveAttribute("href", site.instagram);
+  });
+});

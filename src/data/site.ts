@@ -4,6 +4,7 @@ export type Site = {
   slogan: string;
   whatsapp: string;
   instagram: string;
+  tiktok?: string;
   footerText: string;
 };
 

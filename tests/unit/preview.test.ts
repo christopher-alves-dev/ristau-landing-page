@@ -34,6 +34,11 @@ describe("previewSite", () => {
     const live = previewSite({ slogan: "Novo slogan", brand: "" }, site);
     expect(live).toEqual({ ...site, slogan: "Novo slogan" });
   });
+
+  it("apagar o TikTok esconde o link na prévia", () => {
+    const live = previewSite({ tiktok: "" }, { ...site, tiktok: "https://www.tiktok.com/@ristau" });
+    expect(live.tiktok).toBe("");
+  });
 });
 
 describe("changedSection", () => {

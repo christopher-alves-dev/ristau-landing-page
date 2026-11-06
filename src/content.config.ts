@@ -31,6 +31,7 @@ const site = defineCollection({
     slogan: z.string(),
     whatsapp: z.string().regex(/^\d{12,13}$/),
     instagram: z.url(),
+    tiktok: z.url().optional(),
     seoTitle: z.string(),
     seoDescription: z.string(),
     footerText: z.string(),
