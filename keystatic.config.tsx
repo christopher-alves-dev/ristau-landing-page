@@ -55,6 +55,7 @@ export default config({
           pattern: { regex: /^\d{12,13}$/, message: "Use só números, com 55 e o DDD" },
         }),
         instagram: siteUrl("instagram", "Instagram"),
+        tiktok: siteUrl("tiktok", "TikTok", false),
         seoTitle: requiredText("Título da aba / Google"),
         seoDescription: requiredText("Descrição para o Google", { multiline: true }),
         footerText: siteText("footerText", "Frase do rodapé"),

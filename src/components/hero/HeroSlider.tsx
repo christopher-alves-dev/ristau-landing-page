@@ -198,6 +198,9 @@ export default function HeroSlider({ products, site }: Props) {
           <a href="#feito-a-mao" className="hover:opacity-70">Feito à mão</a>
           <a href="#como-encomendar" className="hover:opacity-70">Como encomendar</a>
           <a href={site.instagram} target="_blank" rel="noreferrer" className="hover:opacity-70">Instagram</a>
+          {site.tiktok && (
+            <a href={site.tiktok} target="_blank" rel="noreferrer" className="hover:opacity-70">TikTok</a>
+          )}
         </nav>
       </header>
 

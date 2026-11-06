@@ -60,9 +60,19 @@ export default function HomeSections({ features, steps, site }: Props) {
         className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 py-10 text-sm md:flex-row md:px-10"
       >
         <img src={site.logo} alt={site.brand} width={94} height={80} className="h-20 w-auto" />
-        <div className="flex flex-col items-center gap-1 text-center opacity-70 md:items-end md:text-right">
-          <span>{site.footerText}</span>
-          <small>
+        <div className="flex flex-col items-center gap-1 text-center md:items-end md:text-right">
+          <nav aria-label="Redes sociais" className="mb-2 flex gap-5 font-semibold">
+            <a href={site.instagram} target="_blank" rel="noreferrer" className="hover:opacity-70">
+              Instagram
+            </a>
+            {site.tiktok && (
+              <a href={site.tiktok} target="_blank" rel="noreferrer" className="hover:opacity-70">
+                TikTok
+              </a>
+            )}
+          </nav>
+          <span className="opacity-70">{site.footerText}</span>
+          <small className="opacity-70">
             © {new Date().getFullYear()} {site.brand}. Todos os direitos reservados.
           </small>
         </div>

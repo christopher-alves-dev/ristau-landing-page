@@ -144,8 +144,12 @@ export function siteText(key: keyof SiteDraft, label: string, extra: TextOptions
   };
 }
 
-export function siteUrl(key: keyof SiteDraft, label: string) {
-  const base = fields.url({ label, validation: { isRequired: true } });
+export function siteUrl(key: keyof SiteDraft, label: string, isRequired = true) {
+  const base = fields.url({
+    label,
+    validation: { isRequired },
+    description: isRequired ? undefined : "Opcional. Deixe vazio para esconder o link no site.",
+  });
   return {
     ...base,
     Input(props: Parameters<typeof base.Input>[0]) {
