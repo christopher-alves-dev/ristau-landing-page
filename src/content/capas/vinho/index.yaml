@@ -1,0 +1,11 @@
+name: "Vinho com Pingente"
+order: 4
+word: "Vinho"
+description: "Trança vinho intensa, com pingente de franjas mostarda e inicial dourada."
+price: "R$ 89"
+image: ../vinho/image.webp
+colors:
+  bg: "#f0d1d6"
+  blob: "#d98e9b"
+  accent: "#8c1c32"
+  ink: "#3d0f18"

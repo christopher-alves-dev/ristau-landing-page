@@ -1,8 +1,7 @@
 import { expect, test, type Page } from "@playwright/test";
-import { products } from "../../src/data/products";
 
-const [first, second] = products;
-const last = products.at(-1)!;
+type Capa = { name: string };
+let first: Capa, second: Capa, last: Capa, total: number;
 
 const heading = (page: Page) => page.getByRole("heading", { level: 1 });
 const hero = (page: Page) => page.getByRole("region", { name: "Capas de Kindle em crochê" });
@@ -10,6 +9,10 @@ const hero = (page: Page) => page.getByRole("region", { name: "Capas de Kindle e
 test.beforeEach(async ({ page }) => {
   await page.goto("/");
   await expect(page.locator("astro-island")).not.toHaveAttribute("ssr");
+  const names = await page.getByRole("tab").evaluateAll((tabs) => tabs.map((t) => t.getAttribute("aria-label")!));
+  total = names.length;
+  [first, second] = names.map((name) => ({ name }));
+  last = { name: names.at(-1)! };
 });
 
 test("carrega a página com título e primeira capa", async ({ page }) => {
@@ -29,7 +32,8 @@ test("não gera erros no console", async ({ page }) => {
 
 test("todas as fotos das capas carregam", async ({ page }) => {
   const thumbs = page.getByRole("tab").locator("img");
-  await expect(thumbs).toHaveCount(products.length);
+  expect(total).toBeGreaterThan(1);
+  await expect(thumbs).toHaveCount(total);
   for (const img of await thumbs.all()) {
     await expect.poll(() => img.evaluate((el: HTMLImageElement) => el.complete && el.naturalWidth > 0)).toBe(true);
   }

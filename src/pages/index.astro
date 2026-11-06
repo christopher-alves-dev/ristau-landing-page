@@ -1,52 +1,14 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import HeroSlider from "../components/hero/HeroSlider";
-import { site, whatsappLink } from "../data/site";
+import { loadHome, loadProducts, loadSite } from "../data/content";
+import { whatsappLink } from "../data/site";
 
-type Feature = {
-  title: string;
-  subtitle?: string;
-  text?: string;
-  items?: string[];
-};
-
-const features: Feature[] = [
-  {
-    title: "100% feita à mão",
-    subtitle: "Produzida em crochê, ponto a ponto",
-    items: ["Fio de malha premium", "Cartela com mais de 70 cores"],
-  },
-  {
-    title: "Sob medida",
-    text: "Kindle 11ª geração, Paperwhite, Colorsoft, Oasis ou Scribe: o tamanho é ajustado ao seu modelo.",
-  },
-  {
-    title: "Do seu jeito",
-    text: "Personalize sua capa Kindle com itens adicionais: alça de mão, inicial do seu nome, laço com ponteiras, chaveiro tassel com pingente.",
-  },
-];
-
-const steps = [
-  {
-    n: "01",
-    title: "Escolha o modelo",
-    text: "Diga qual é o seu Kindle para a capa ficar no tamanho certinho.",
-  },
-  {
-    n: "02",
-    title: "Monte o visual",
-    text: "Cores, florzinhas, bolsinho, alça. A gente conversa e define tudo junto.",
-  },
-  {
-    n: "03",
-    title: "Receba em casa",
-    text: "Produção em até 7 dias úteis e envio para todo o Brasil.",
-  },
-];
+const [products, site, { features, steps }] = await Promise.all([loadProducts(), loadSite(), loadHome()]);
 ---
 
-<Layout>
-  <HeroSlider client:load />
+<Layout title={site.seoTitle} description={site.seoDescription}>
+  <HeroSlider client:load products={products} site={site} />
 
   <main>
     <section
@@ -56,23 +18,23 @@ const steps = [
       <p
         class="text-terracotta text-sm font-semibold tracking-[0.2em] uppercase"
       >
-        Capa Kindle
+        {features.eyebrow}
       </p>
       <h2
         class="font-display mt-3 max-w-2xl text-4xl leading-tight font-black md:text-6xl"
       >
-        Seu Kindle protegido e de roupa nova.
+        {features.title}
       </h2>
       <div class="mt-14 grid gap-6 md:grid-cols-3">
         {
-          features.map((f) => (
+          features.cards.map((f) => (
             <article class="rounded-3xl bg-white p-8 shadow-[0_10px_40px_-20px_rgb(43_29_23/0.25)]">
               <h3 class="font-display text-2xl font-bold">{f.title}</h3>
               {f.subtitle && <p class="mt-3 opacity-75">{f.subtitle}</p>}
               {f.text && (
                 <p class="mt-3 leading-relaxed opacity-75">{f.text}</p>
               )}
-              {f.items && (
+              {f.items.length > 0 && (
                 <ul class="mt-3 space-y-2 leading-relaxed opacity-75">
                   {f.items.map((item) => (
                     <li class="before:text-terracotta flex gap-2 before:content-['•']">
@@ -92,17 +54,17 @@ const steps = [
         <p
           class="text-sm font-semibold tracking-[0.2em] text-[#f4a3b8] uppercase"
         >
-          Como encomendar
+          {steps.eyebrow}
         </p>
         <h2 class="font-display mt-3 text-4xl font-black md:text-6xl">
-          Três passos e pronto.
+          {steps.title}
         </h2>
         <ol class="mt-14 grid gap-10 md:grid-cols-3">
           {
-            steps.map((s) => (
+            steps.items.map((s, i) => (
               <li class="border-t border-white/20 pt-6">
                 <span class="font-display text-5xl font-black text-[#f4a3b8]">
-                  {s.n}
+                  {String(i + 1).padStart(2, "0")}
                 </span>
                 <h3 class="mt-4 text-xl font-bold">{s.title}</h3>
                 <p class="mt-2 leading-relaxed opacity-70">{s.text}</p>
@@ -111,14 +73,12 @@ const steps = [
           }
         </ol>
         <a
-          href={whatsappLink(
-            "Olá! Quero encomendar uma capa de Kindle personalizada.",
-          )}
+          href={whatsappLink(site.whatsapp, steps.ctaMessage)}
           target="_blank"
           rel="noreferrer"
           class="bg-terracotta mt-16 inline-block rounded-full px-8 py-4 font-semibold text-white transition-transform hover:scale-105"
         >
-          Pedir a minha pelo WhatsApp
+          {steps.cta}
         </a>
       </div>
     </section>
@@ -137,7 +97,7 @@ const steps = [
     <div
       class="flex flex-col items-center gap-1 text-center opacity-70 md:items-end md:text-right"
     >
-      <span>Capas de Kindle em crochê, feitas com carinho.</span>
+      <span>{site.footerText}</span>
       <small
         >© {new Date().getFullYear()}
         {site.brand}. Todos os direitos reservados.</small

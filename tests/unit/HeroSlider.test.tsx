@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import HeroSlider from "../../src/components/hero/HeroSlider";
-import { products } from "../../src/data/products";
+import { products, site } from "./fixtures/hero";
 
 const [first, second] = products;
 const last = products.at(-1)!;
@@ -11,7 +11,7 @@ const heading = () => screen.getByRole("heading", { level: 1 });
 
 describe("HeroSlider", () => {
   beforeEach(() => {
-    render(<HeroSlider />);
+    render(<HeroSlider products={products} site={site} />);
   });
 
   it("mostra a primeira capa ao carregar", () => {
@@ -22,6 +22,7 @@ describe("HeroSlider", () => {
 
   it("renderiza uma miniatura por capa, com a primeira selecionada", () => {
     const tabs = screen.getAllByRole("tab");
+    expect(tabs[0].querySelector("img")).toHaveAttribute("src", first.thumb);
     expect(tabs).toHaveLength(products.length);
     expect(tabs[0]).toHaveAttribute("aria-selected", "true");
     expect(tabs.slice(1).every((t) => t.getAttribute("aria-selected") === "false")).toBe(true);
@@ -68,6 +69,7 @@ describe("HeroSlider", () => {
   it("monta o link do WhatsApp com o nome da capa atual", () => {
     const link = screen.getByRole("link", { name: "Quero a minha" });
     const text = new URL(link.getAttribute("href")!).searchParams.get("text");
+    expect(link.getAttribute("href")).toMatch(`https://wa.me/${site.whatsapp}?`);
     expect(text).toContain(first.name);
   });
 });
