@@ -1,5 +1,6 @@
 import { getImage } from "astro:assets";
 import { getCollection, getEntry } from "astro:content";
+import type { Home } from "./home";
 import type { Product } from "./products";
 import { LOGO, type Site } from "./site";
 
@@ -25,5 +26,5 @@ export async function loadSite() {
 }
 
 export async function loadHome() {
-  return (await getEntry("home", "home"))!.data;
+  return (await getEntry("home", "home"))!.data satisfies Home;
 }

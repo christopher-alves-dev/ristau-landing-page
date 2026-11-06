@@ -20,4 +20,5 @@ export const site: Site = {
   slogan: "Slogan",
   whatsapp: "5511999999999",
   instagram: "https://instagram.com/",
+  footerText: "Rodapé",
 };

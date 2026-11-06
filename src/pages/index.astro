@@ -1,107 +1,13 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import HeroSlider from "../components/hero/HeroSlider";
+import HomeSections from "../components/HomeSections";
 import { loadHome, loadProducts, loadSite } from "../data/content";
-import { whatsappLink } from "../data/site";
 
-const [products, site, { features, steps }] = await Promise.all([loadProducts(), loadSite(), loadHome()]);
+const [products, site, home] = await Promise.all([loadProducts(), loadSite(), loadHome()]);
 ---
 
 <Layout title={site.seoTitle} description={site.seoDescription}>
   <HeroSlider client:load products={products} site={site} />
-
-  <main>
-    <section
-      id="feito-a-mao"
-      class="mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-32"
-    >
-      <p
-        class="text-terracotta text-sm font-semibold tracking-[0.2em] uppercase"
-      >
-        {features.eyebrow}
-      </p>
-      <h2
-        class="font-display mt-3 max-w-2xl text-4xl leading-tight font-black md:text-6xl"
-      >
-        {features.title}
-      </h2>
-      <div class="mt-14 grid gap-6 md:grid-cols-3">
-        {
-          features.cards.map((f) => (
-            <article class="rounded-3xl bg-white p-8 shadow-[0_10px_40px_-20px_rgb(43_29_23/0.25)]">
-              <h3 class="font-display text-2xl font-bold">{f.title}</h3>
-              {f.subtitle && <p class="mt-3 opacity-75">{f.subtitle}</p>}
-              {f.text && (
-                <p class="mt-3 leading-relaxed opacity-75">{f.text}</p>
-              )}
-              {f.items.length > 0 && (
-                <ul class="mt-3 space-y-2 leading-relaxed opacity-75">
-                  {f.items.map((item) => (
-                    <li class="before:text-terracotta flex gap-2 before:content-['•']">
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </article>
-          ))
-        }
-      </div>
-    </section>
-
-    <section id="como-encomendar" class="bg-ink text-cream">
-      <div class="mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-32">
-        <p
-          class="text-sm font-semibold tracking-[0.2em] text-[#f4a3b8] uppercase"
-        >
-          {steps.eyebrow}
-        </p>
-        <h2 class="font-display mt-3 text-4xl font-black md:text-6xl">
-          {steps.title}
-        </h2>
-        <ol class="mt-14 grid gap-10 md:grid-cols-3">
-          {
-            steps.items.map((s, i) => (
-              <li class="border-t border-white/20 pt-6">
-                <span class="font-display text-5xl font-black text-[#f4a3b8]">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <h3 class="mt-4 text-xl font-bold">{s.title}</h3>
-                <p class="mt-2 leading-relaxed opacity-70">{s.text}</p>
-              </li>
-            ))
-          }
-        </ol>
-        <a
-          href={whatsappLink(site.whatsapp, steps.ctaMessage)}
-          target="_blank"
-          rel="noreferrer"
-          class="bg-terracotta mt-16 inline-block rounded-full px-8 py-4 font-semibold text-white transition-transform hover:scale-105"
-        >
-          {steps.cta}
-        </a>
-      </div>
-    </section>
-  </main>
-
-  <footer
-    class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 py-10 text-sm md:flex-row md:px-10"
-  >
-    <img
-      src={site.logo}
-      alt={site.brand}
-      width="94"
-      height="80"
-      class="h-20 w-auto"
-    />
-    <div
-      class="flex flex-col items-center gap-1 text-center opacity-70 md:items-end md:text-right"
-    >
-      <span>{site.footerText}</span>
-      <small
-        >© {new Date().getFullYear()}
-        {site.brand}. Todos os direitos reservados.</small
-      >
-    </div>
-  </footer>
+  <HomeSections {...home} site={site} />
 </Layout>
