@@ -1,0 +1,13 @@
+name: Tons Pastéis
+order: 11
+word: kindle
+description: >-
+  Tons pastéis juntos em perfeita harmonia. Verde chá, lavanda, manteiga,
+  pêssego e tie dye candy sunset.
+price: R$ 89
+image: ../tons-pasteis/image.webp
+colors:
+  bg: '#d8eee6'
+  blob: '#9fd3c1'
+  accent: '#3d8a72'
+  ink: '#163a2f'
