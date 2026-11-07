@@ -1,0 +1,13 @@
+name: Tie Dye Candy Sunset
+order: 2
+word: kindle
+description: >-
+  Fio mesclado em lilás, verde-água, pêssego e amarelo, como uma pintura em
+  aquarela.
+price: R$ 95
+image: ../tie-dye-candy-sunset/image.webp
+colors:
+  bg: '#dbd2ef'
+  blob: '#ab95da'
+  accent: '#5e3caa'
+  ink: '#241740'
