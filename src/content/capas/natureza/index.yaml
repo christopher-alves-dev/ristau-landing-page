@@ -1,0 +1,13 @@
+name: Natureza
+order: 6
+word: Kindle
+description: >-
+  Ponto bem encorpado em faixas azul, pink, cru, coral e verde-menta, com
+  etiqueta de couro.
+price: R$ 85
+image: ../natureza/image.webp
+colors:
+  bg: '#d6e4f5'
+  blob: '#93b8e6'
+  accent: '#2766b3'
+  ink: '#14294a'
