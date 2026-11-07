@@ -1,11 +1,13 @@
-name: "Terra e Mar"
+name: Cappuccino Celeste
 order: 3
-word: "Terra"
-description: "Faixas em cru, caramelo, bege com poá, cacau e azul, com pingente de franjas e inicial."
-price: "R$ 89"
+word: kindle
+description: >-
+  Uma das queridinhas! A combinação perfeita do azul celeste, ganache,
+  cappuccino poá, doce de leite e champagne. Com adicional de chaveiro tassel.
+price: R$ 103
 image: ../terra-mar/image.webp
 colors:
-  bg: "#e8ded9"
-  blob: "#cab1a6"
-  accent: "#906956"
-  ink: "#362820"
+  bg: '#e8ded9'
+  blob: '#cab1a6'
+  accent: '#906956'
+  ink: '#362820'
