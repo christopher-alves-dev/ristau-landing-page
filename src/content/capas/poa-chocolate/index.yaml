@@ -1,0 +1,13 @@
+name: Poá Chocolate
+order: 9
+word: Kindle
+description: >-
+  Produzida na cor chocolate poá, com adicional de inicial do nome + laço com
+  ponteira.
+price: R$ 109
+image: ../poa-chocolate/image.webp
+colors:
+  bg: '#efe2da'
+  blob: '#c9a594'
+  accent: '#7d4f3d'
+  ink: '#33201a'
