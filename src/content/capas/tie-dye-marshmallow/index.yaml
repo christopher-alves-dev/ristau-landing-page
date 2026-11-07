@@ -1,0 +1,11 @@
+name: Tie Dye Marshmallow
+order: 7
+word: kindle
+description: Trança em fio mesclado rosa, verde-água e pêssego, com etiqueta de couro.
+price: R$ 95
+image: ../tie-dye-marshmallow/image.webp
+colors:
+  bg: '#fbdcea'
+  blob: '#f3a5c8'
+  accent: '#c2477f'
+  ink: '#45152c'
