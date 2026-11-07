@@ -1,0 +1,13 @@
+name: Tiffany
+order: 5
+word: kindle
+description: >-
+  Uma capa cheia de personalidade, com uma cor que alegra o dia de qualquer
+  leitora. Com adicional de laço com ponteira.
+price: R$ 93
+image: ../tiffany/image.webp
+colors:
+  bg: '#d4eced'
+  blob: '#9bd2d4'
+  accent: '#398184'
+  ink: '#1a3b3d'
