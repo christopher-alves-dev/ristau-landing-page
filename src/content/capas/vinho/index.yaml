@@ -1,11 +1,13 @@
-name: "Vinho com Pingente"
+name: 'Vinho '
 order: 4
-word: "Vinho"
-description: "Trança vinho intensa, com pingente de franjas mostarda e inicial dourada."
-price: "R$ 89"
+word: kindle
+description: >-
+  Essa não erra nunca, cor vinho é elegante e atemporal. Com adicional de
+  inicial do nome + chaveiro tassel. Um luxo!
+price: R$ 109
 image: ../vinho/image.webp
 colors:
-  bg: "#f0d1d6"
-  blob: "#d98e9b"
-  accent: "#8c1c32"
-  ink: "#3d0f18"
+  bg: '#f0d1d6'
+  blob: '#d98e9b'
+  accent: '#8c1c32'
+  ink: '#3d0f18'
