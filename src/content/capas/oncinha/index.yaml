@@ -1,0 +1,11 @@
+name: "Oncinha"
+order: 10
+word: "Oncinha"
+description: "Ponto bem encorpado em fio animal print caramelo e terracota, com etiqueta de couro."
+price: "R$ 89"
+image: ../oncinha/image.webp
+colors:
+  bg: "#f5e1d3"
+  blob: "#e0a582"
+  accent: "#9c4426"
+  ink: "#3f1b0f"
