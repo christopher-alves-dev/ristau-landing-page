@@ -1,0 +1,12 @@
+name: Animal Print Girafa
+word: kindle
+description: >-
+  Animal print girafa é uma estampa cheia de personalidade, que arrasa quando
+  chega.
+price: R$ 95
+image: ../animal-print-girafa/image.webp
+colors:
+  bg: '#f5e1d3'
+  blob: '#e0a582'
+  accent: '#9c4426'
+  ink: '#3f1b0f'
