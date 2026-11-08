@@ -1,7 +1,9 @@
 name: Poá Clássico
 order: 10
 word: kindle
-description: Fio de bolinhas em faixas preta e off-white, com etiqueta de couro.
+description: >-
+  A estampa que não sai de moda, ainda mais se for em tons clássicos, como o
+  preto e branco.
 price: R$ 95
 image: ../poa-classico/image.webp
 colors:
