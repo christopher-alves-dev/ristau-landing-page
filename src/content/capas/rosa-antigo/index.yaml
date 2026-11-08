@@ -1,0 +1,11 @@
+name: Rosa Antigo
+word: kindle
+description: >-
+  Fio rosa antigo com laço de ponteiras douradas, iniciais em metal e alça de couro.
+price: R$ 89
+image: ../rosa-antigo/image.webp
+colors:
+  bg: '#f8e2dd'
+  blob: '#e8aaa2'
+  accent: '#a94f55'
+  ink: '#4a2023'

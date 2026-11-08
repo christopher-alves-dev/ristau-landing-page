@@ -1,0 +1,11 @@
+name: Rosa Chiclete
+word: kindle
+description: >-
+  Ponto bem encorpado em fio rosa-chiclete, com etiqueta de couro e inicial dourada.
+price: R$ 89
+image: ../rosa-chiclete/image.webp
+colors:
+  bg: '#fde0ea'
+  blob: '#f59abb'
+  accent: '#c72f70'
+  ink: '#4f1030'
