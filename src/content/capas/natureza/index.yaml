@@ -1,9 +1,7 @@
 name: Natureza
 order: 2
 word: Kindle
-description: >-
-  Ponto bem encorpado em faixas azul, pink, cru, coral e verde-menta, com
-  etiqueta de couro.
+description: Cores que juntas criam uma perfeita harmonia, inspirada nas cores da natureza.
 price: R$ 85
 image: ../natureza/image.webp
 colors:
