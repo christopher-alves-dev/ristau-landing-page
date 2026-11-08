@@ -237,17 +237,19 @@ export default function HeroSlider({ products, site }: Props) {
               </motion.p>
               <motion.div variants={textItem} className="mt-8 flex flex-wrap items-center gap-5">
                 <a
-                  href={whatsappLink(site.whatsapp, `Olá! Quero encomendar a capa ${product.name} para o meu Kindle.`)}
+                  href={whatsappLink(site.whatsapp, product.ctaMessage ?? `Olá! Quero encomendar a capa ${product.name} para o meu Kindle.`)}
                   target="_blank"
                   rel="noreferrer"
                   className="rounded-full px-7 py-4 font-semibold text-white shadow-lg transition-transform hover:scale-105 active:scale-95"
                   style={{ backgroundColor: product.colors.accent }}
                 >
-                  Quero a minha
+                  {product.cta ?? "Quero a minha"}
                 </a>
-                <span className="text-lg">
-                  a partir de <strong className="text-2xl">{product.price}</strong>
-                </span>
+                {product.price && (
+                  <span className="text-lg">
+                    a partir de <strong className="text-2xl">{product.price}</strong>
+                  </span>
+                )}
               </motion.div>
             </motion.div>
           </AnimatePresence>

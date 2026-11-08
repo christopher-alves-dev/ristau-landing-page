@@ -1,8 +1,20 @@
 import { collection, config, fields, singleton } from "@keystatic/core";
-import { capaName, color, homeSection, liveText, photo, price, siteText, siteUrl } from "./src/admin/fields";
+import { capaOrder } from "./src/admin/CapaOrder";
+import { capaName, color, customName, homeSection, liveText, photo, price, siteText, siteUrl } from "./src/admin/fields";
 
 const requiredText = (label: string, extra: { description?: string; multiline?: boolean } = {}) =>
   fields.text({ label, ...extra, validation: { isRequired: true } });
+
+const colors = () =>
+  fields.object(
+    {
+      bg: color("bg", "Fundo", "Cor de fundo da hero."),
+      blob: color("blob", "Mancha", "Mancha desfocada atrás da capa."),
+      accent: color("accent", "Destaque", "Botão, borda da miniatura e enfeites."),
+      ink: color("ink", "Texto", "Cor dos textos."),
+    },
+    { label: "Cores" },
+  );
 
 export default config({
   storage: import.meta.env.PROD
@@ -10,7 +22,7 @@ export default config({
     : { kind: "local" },
   ui: {
     brand: { name: "Ristau" },
-    navigation: { Catálogo: ["capas"], Página: ["home", "site"] },
+    navigation: { Catálogo: ["capas", "carrossel", "personalizada"], Página: ["home", "site"] },
   },
   collections: {
     capas: collection({
@@ -18,31 +30,38 @@ export default config({
       path: "src/content/capas/*/",
       format: { data: "yaml" },
       slugField: "name",
-      columns: ["name", "order", "price"],
+      columns: ["name", "price"],
       schema: {
         name: capaName(),
-        order: fields.integer({
-          label: "Posição no carrossel",
-          description: "A menor aparece primeiro.",
-          validation: { isRequired: true, min: 1 },
-        }),
         word: liveText("word", "Palavra de fundo", { description: "Palavra grande que aparece atrás da capa." }),
         description: liveText("description", "Descrição", { multiline: true }),
         price: price(),
         image: photo("Foto"),
-        colors: fields.object(
-          {
-            bg: color("bg", "Fundo", "Cor de fundo da hero."),
-            blob: color("blob", "Mancha", "Mancha desfocada atrás da capa."),
-            accent: color("accent", "Destaque", "Botão, borda da miniatura e enfeites."),
-            ink: color("ink", "Texto", "Cor dos textos."),
-          },
-          { label: "Cores" },
-        ),
+        colors: colors(),
       },
     }),
   },
   singletons: {
+    carrossel: singleton({
+      label: "Ordem do carrossel",
+      path: "src/content/carrossel",
+      format: { data: "yaml" },
+      schema: { capas: capaOrder() },
+    }),
+    personalizada: singleton({
+      label: "Capa personalizada",
+      path: "src/content/personalizada/",
+      format: { data: "yaml" },
+      schema: {
+        name: customName(),
+        word: liveText("word", "Palavra de fundo", { description: "Palavra grande que aparece atrás da capa." }),
+        description: liveText("description", "Descrição", { multiline: true }),
+        cta: liveText("cta", "Texto do botão", {}),
+        ctaMessage: requiredText("Mensagem enviada no WhatsApp", { multiline: true }),
+        image: photo("Foto", "./"),
+        colors: colors(),
+      },
+    }),
     site: singleton({
       label: "Informações do site",
       path: "src/content/site",

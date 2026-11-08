@@ -9,6 +9,16 @@ const last = products.at(-1)!;
 
 const heading = () => screen.getByRole("heading", { level: 1 });
 
+describe("HeroSlider com a capa personalizada", () => {
+  it("usa o botão e a mensagem próprios e esconde o preço", () => {
+    const custom = { ...first, price: undefined, cta: "Criar a minha", ctaMessage: "Quero personalizar" };
+    render(<HeroSlider products={[custom]} site={site} />);
+    const link = screen.getByRole("link", { name: "Criar a minha" });
+    expect(decodeURIComponent(link.getAttribute("href")!)).toContain("Quero personalizar");
+    expect(screen.queryByText(/a partir de/)).not.toBeInTheDocument();
+  });
+});
+
 describe("HeroSlider", () => {
   beforeEach(() => {
     render(<HeroSlider products={products} site={site} />);
@@ -16,7 +26,7 @@ describe("HeroSlider", () => {
 
   it("mostra a primeira capa ao carregar", () => {
     expect(heading()).toHaveTextContent(first.name);
-    expect(screen.getByText(first.price)).toBeInTheDocument();
+    expect(screen.getByText(first.price!)).toBeInTheDocument();
     expect(screen.getByRole("img", { name: `Capa de Kindle em crochê ${first.name}` })).toHaveAttribute("src", first.image);
   });
 
