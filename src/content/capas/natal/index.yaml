@@ -1,8 +1,9 @@
-name: Natal
+name: Edição Especial Natal
 word: kindle
 description: >-
-  Fio vermelho com pontos verdes de bolinhas, borda off-white, laço de ponteiras douradas e inicial em metal.
-price: R$ 89
+  Porque o nosso kindle merece uma roupinha especial para a época mais mágica do
+  ano! Com trama que lembra coraçõeszinhos.
+price: R$ 114
 image: ../natal/image.webp
 colors:
   bg: '#fbe9e4'
