@@ -1,0 +1,12 @@
+name: Poá Colorida
+word: kindle
+description: >-
+  Aquela paleta colorida que agrada o olhar, utilizando vários tons de poá, um
+  charme! 
+price: R$ 95
+image: ../poa-colorida/image.webp
+colors:
+  bg: '#d5efeb'
+  blob: '#9ad8d0'
+  accent: '#37867c'
+  ink: '#14393a'
