@@ -1,0 +1,12 @@
+name: Romã
+word: kindle
+description: >-
+  Se você quer uma capa kindle linda e feminina, a cor romã é a escolha
+  perfeita.
+price: R$ 85
+image: ../roma/image.webp
+colors:
+  bg: '#fbdfe6'
+  blob: '#f0a0b5'
+  accent: '#b8345a'
+  ink: '#4a1224'

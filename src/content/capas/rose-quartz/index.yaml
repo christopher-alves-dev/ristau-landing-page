@@ -1,0 +1,12 @@
+name: Rose Quartz
+word: kindle
+description: >-
+  Sucesso no Tiktok, capa kindle no rose quatz, com laço, inicial do nome e alça
+  de mão. Perfeita!
+price: R$ 120
+image: ../rose-quartz/image.webp
+colors:
+  bg: '#f8e2dd'
+  blob: '#e8aaa2'
+  accent: '#a94f55'
+  ink: '#4a2023'
