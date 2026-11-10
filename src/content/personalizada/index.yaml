@@ -1,12 +1,12 @@
-name: Crie do seu jeito
-word: Seu jeito
+name: Não encontrou a sua favorita?
+word: Kindle
 description: >-
-  Escolha as cores e os tipos de fio e a gente faz uma capa única, do jeitinho
-  que você imaginou.
+  Juntas vamos criar uma capa que é a sua cara! Colorida ou em cor única, em fio
+  liso ou fio estampado. Com ou sem acessórios, você que escolhe :) 
 cta: Criar a minha
 ctaMessage: >-
-  Olá! Quero criar uma capa personalizada para o meu Kindle, escolhendo as
-  cores e os tipos de fio.
+  Olá! Quero criar uma capa personalizada para o meu Kindle, escolhendo as cores
+  e acessórios.
 image: ./image.webp
 colors:
   bg: '#f6ece0'
