@@ -1,0 +1,11 @@
+name: Pink Tangerina
+word: kindle
+description: >-
+  Ponto trançado em fio pink, com pingente de franjas pink e tangerina, inicial em metal e etiqueta de couro.
+price: R$ 89
+image: ../pink-tangerina/image.webp
+colors:
+  bg: '#fde0e6'
+  blob: '#f08aa6'
+  accent: '#ef7d1a'
+  ink: '#5a0f24'
