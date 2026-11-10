@@ -1,0 +1,12 @@
+name: Sereia Vibes
+word: kindle
+description: >-
+  Um mar de cores para te encantar, com adicionais de alça de mão, chaveiro
+  tassel e laço com ponteira.
+price: R$ 126
+image: ../sereia-vibes/image.webp
+colors:
+  bg: '#fbe6f1'
+  blob: '#c9b3f0'
+  accent: '#e8579a'
+  ink: '#3d2a5c'
