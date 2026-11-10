@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 import { formatPriceInput, maskPrice, PRICE_REGEX, priceToCents } from "../data/price";
 import { MAX_UPLOAD_MB, uploadError } from "../data/uploads";
 import type { Home } from "../data/home";
-import type { SiteDraft } from "../data/preview";
+import { CUSTOM_ID, type SiteDraft } from "../data/preview";
 import { usePublishCapa, usePublishColor, usePublishHome, usePublishImage, usePublishSite } from "./draft";
 import { ObjectFields, previewValue } from "./FormFields";
 import PreviewPanel from "./PreviewPanel";
@@ -29,7 +29,24 @@ export function capaName() {
   };
 }
 
-export function liveText(key: "word" | "description", label: string, extra: { description?: string; multiline?: boolean }) {
+export function customName() {
+  const base = fields.text({ label: "Nome", validation: { isRequired: true } });
+  return {
+    ...base,
+    Input(props: Parameters<typeof base.Input>[0]) {
+      usePublishCapa("slug", CUSTOM_ID);
+      usePublishCapa("name", props.value);
+      return (
+        <>
+          <base.Input {...props} />
+          <PreviewPanel />
+        </>
+      );
+    },
+  };
+}
+
+export function liveText(key: "word" | "description" | "cta", label: string, extra: { description?: string; multiline?: boolean }) {
   const base = fields.text({ label, ...extra, validation: { isRequired: true } });
   return {
     ...base,
@@ -93,10 +110,10 @@ export function color(key: "bg" | "blob" | "accent" | "ink", label: string, desc
   };
 }
 
-export function photo(label: string) {
+export function photo(label: string, publicPath = "../") {
   const base = fields.image({
     label,
-    publicPath: "../",
+    publicPath,
     validation: { isRequired: true },
     description: `PNG ou WebP com fundo transparente, até ${MAX_UPLOAD_MB} MB. O site gera as versões otimizadas sozinho.`,
   });

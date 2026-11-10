@@ -1,0 +1,15 @@
+name: Crie do seu jeito
+word: Seu jeito
+description: >-
+  Escolha as cores e os tipos de fio e a gente faz uma capa única, do jeitinho
+  que você imaginou.
+cta: Criar a minha
+ctaMessage: >-
+  Olá! Quero criar uma capa personalizada para o meu Kindle, escolhendo as
+  cores e os tipos de fio.
+image: ./image.webp
+colors:
+  bg: '#f6ece0'
+  blob: '#e9b4ae'
+  accent: '#b0566a'
+  ink: '#4a2418'

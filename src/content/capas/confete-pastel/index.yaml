@@ -1,0 +1,10 @@
+name: "Confete Pastel"
+word: "Confete"
+description: "Faixas em verde-menta, malva, pêssego e bege com bolinhas brancas, e etiqueta de couro."
+price: "R$ 89"
+image: ../confete-pastel/image.webp
+colors:
+  bg: "#d5efeb"
+  blob: "#9ad8d0"
+  accent: "#37867c"
+  ink: "#14393a"

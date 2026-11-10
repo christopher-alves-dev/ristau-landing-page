@@ -14,9 +14,14 @@ describe("conteúdo do Keystatic", () => {
     expect(capas.length).toBeGreaterThan(0);
   });
 
-  it("não repete a posição no carrossel", () => {
-    const orders = capas.map((c) => c.entry.order);
-    expect(new Set(orders).size).toBe(orders.length);
+  it("não repete a posição no carrossel", async () => {
+    const { capas: order } = await reader.singletons.carrossel.readOrThrow();
+    expect(new Set(order).size).toBe(order.length);
+  });
+
+  it("tem a capa personalizada com a foto ao lado do arquivo", async () => {
+    const custom = await reader.singletons.personalizada.readOrThrow();
+    expect(custom.image).toBe("./image.webp");
   });
 
   it("tem as informações do site e as seções da página", async () => {

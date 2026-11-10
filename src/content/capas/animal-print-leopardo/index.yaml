@@ -1,0 +1,11 @@
+name: Animal Print Leopardo
+word: kindle
+description: >-
+  Fio com estampa de leopardo, laço de ponteiras douradas, plaquinha dourada e alça de couro.
+price: R$ 89
+image: ../animal-print-leopardo/image.webp
+colors:
+  bg: '#f3dfcf'
+  blob: '#d6a184'
+  accent: '#8f5230'
+  ink: '#2b1a12'

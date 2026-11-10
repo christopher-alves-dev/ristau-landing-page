@@ -3,7 +3,9 @@ export type Product = {
   name: string;
   word: string;
   description: string;
-  price: string;
+  price?: string;
+  cta?: string;
+  ctaMessage?: string;
   image: string;
   thumb: string;
   colors: {

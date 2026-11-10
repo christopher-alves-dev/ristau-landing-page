@@ -5,6 +5,7 @@ import type { Site } from "./site";
 export const PREVIEW_MESSAGE = "ristau:preview";
 export const PREVIEW_READY = "ristau:preview-ready";
 export const PREVIEW_ID = "preview";
+export const CUSTOM_ID = "personalizada";
 
 export type CapaDraft = {
   /** Slug da capa quando o formulário abriu; vazio numa capa nova. */
@@ -13,6 +14,7 @@ export type CapaDraft = {
   word?: string;
   description?: string;
   price?: string;
+  cta?: string;
   image?: string | null;
   colors?: Partial<Product["colors"]>;
 };
@@ -37,7 +39,9 @@ export function previewProducts(draft: CapaDraft, products: Product[]): Product[
       name: draft.name || "Nome da capa",
       word: draft.word || "Palavra",
       description: draft.description ?? "",
-      price: draft.price || "R$ 0",
+      price: saved && !saved.price ? undefined : draft.price || "R$ 0",
+      cta: draft.cta || saved?.cta,
+      ctaMessage: saved?.ctaMessage,
       image,
       thumb: draft.image ?? (saved ? saved.thumb : ""),
       colors,

@@ -21,7 +21,7 @@ export const getDraft = () => draft;
 export const resetDraft = () => update(() => ({}));
 export const useDraft = () => useSyncExternalStore(subscribe, getDraft, getDraft);
 
-type CapaText = "slug" | "name" | "word" | "description" | "price";
+type CapaText = "slug" | "name" | "word" | "description" | "price" | "cta";
 
 export function usePublishCapa(key: CapaText, value: string) {
   useEffect(() => update((d) => ({ ...d, capa: { ...d.capa, [key]: value } })), [key, value]);

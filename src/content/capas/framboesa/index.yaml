@@ -1,0 +1,10 @@
+name: "Framboesa"
+word: "Framboesa"
+description: "Ponto trançado bem encorpado em fio rosa-framboesa, com etiqueta de couro."
+price: "R$ 89"
+image: ../framboesa/image.webp
+colors:
+  bg: "#fbdfe6"
+  blob: "#f0a0b5"
+  accent: "#b8345a"
+  ink: "#4a1224"
