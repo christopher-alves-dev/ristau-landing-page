@@ -1,0 +1,12 @@
+name: Verde Mint
+word: kindle
+description: >-
+  Donas de kindle matcha, essa é a cor perfeita para combinar com seu kindle
+  verdinho. 
+price: R$ 114
+image: ../verde-mint/image.webp
+colors:
+  bg: '#dcece0'
+  blob: '#a5cfb0'
+  accent: '#447f58'
+  ink: '#1c3d2a'
