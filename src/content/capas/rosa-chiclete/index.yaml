@@ -1,8 +1,9 @@
 name: Rosa Chiclete
 word: kindle
 description: >-
-  Ponto bem encorpado em fio rosa-chiclete, com etiqueta de couro e inicial dourada.
-price: R$ 89
+  Essa é a nossa capa kindle apelidada de Barbie! Rosa chiclete para as amantes
+  de rosa. 
+price: R$ 85
 image: ../rosa-chiclete/image.webp
 colors:
   bg: '#fde0ea'
