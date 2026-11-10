@@ -4,7 +4,7 @@ description: >-
   Edição especial de Copa do Mundo, a capa kindle mais brasileira, com as cores
   da bandeira.
 price: R$ 89
-image: ../brasil/image.webp
+image: ../copa-do-mundo/image.webp
 colors:
   bg: '#fff3c9'
   blob: '#f7c52e'
