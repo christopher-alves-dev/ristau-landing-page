@@ -1,0 +1,11 @@
+name: Natal
+word: kindle
+description: >-
+  Fio vermelho com pontos verdes de bolinhas, borda off-white, laço de ponteiras douradas e inicial em metal.
+price: R$ 89
+image: ../natal/image.webp
+colors:
+  bg: '#fbe9e4'
+  blob: '#e9a39a'
+  accent: '#1f7a3a'
+  ink: '#5c0d12'
