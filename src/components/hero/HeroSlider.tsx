@@ -282,6 +282,9 @@ export default function HeroSlider({ products, site }: Props) {
                   <motion.div style={{ rotateX: tiltX, rotateY: tiltY }} className="h-full">
                     <motion.img
                       src={product.hero ?? product.image}
+                      srcSet={product.heroSrcSet}
+                      sizes="(min-width: 1024px) 480px, 65vw"
+                      fetchPriority="high"
                       alt={`Capa de Kindle em crochê ${product.name}`}
                       draggable={false}
                       className="h-full w-auto object-contain select-none"

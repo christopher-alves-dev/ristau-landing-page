@@ -8,6 +8,7 @@ export type Product = {
   image: string;
   /** Foto da hero: a capa com um Kindle saindo da abertura, quando houver. */
   hero?: string;
+  heroSrcSet?: string;
   card?: string;
   thumb: string;
   colors: {
