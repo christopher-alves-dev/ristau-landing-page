@@ -93,8 +93,9 @@ faq:
   items:
     - question: A capa serve no meu modelo de Kindle?
       answer: >-
-        Sim. Fazemos capas para todos os modelos de Kindle. Antes de começar a
-        produção, pedimos as dimensões do seu aparelho, para a capa ficar sob
+        Sim. Fazemos capas para todos os modelos de Kindle: Kindle básico,
+        Paperwhite, Colorsoft, Scribe e as gerações anteriores. Antes de começar
+        a produção, pedimos as dimensões do seu aparelho, para a capa ficar sob
         medida.
     - question: Qual é o prazo de produção?
       answer: >-
@@ -111,5 +112,9 @@ faq:
         Pelo WhatsApp. Você escolhe a cor na cartela de mais de 70 opções e os
         itens adicionais, como alça de mão, inicial do nome, laço com ponteiras e
         chaveiro tassel.
+    - question: A capa é uma boa opção de presente?
+      answer: >-
+        Sim. É um presente artesanal e personalizado para quem gosta de ler: você
+        escolhe as cores e pode incluir a inicial do nome de quem vai ganhar.
     - question: Como cuidar da capa?
       answer: Não lave na máquina de lavar.
