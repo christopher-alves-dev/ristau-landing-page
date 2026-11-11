@@ -9,7 +9,8 @@ import { LOGO, type Site } from "./site";
 const PHOTO_WIDTH = 800;
 const mockups = import.meta.glob<{ default: ImageMetadata }>("../assets/mockups/*.webp", { eager: true });
 const mockupOf = (id: string) => mockups[`../assets/mockups/${id}.webp`]?.default;
-const THUMB_HEIGHT = 160;
+const THUMB_HEIGHT = 112;
+const HERO_WIDTHS = [480, 640, 800];
 const CARD_WIDTH = 480;
 
 async function toProduct<T>(id: string, { image, ...data }: T & { image: ImageMetadata }) {
@@ -19,10 +20,23 @@ async function toProduct<T>(id: string, { image, ...data }: T & { image: ImageMe
     getImage({ src: image, height: THUMB_HEIGHT, format: "webp", quality: 80 }),
   ]);
   const mockup = mockupOf(id);
-  const hero = mockup
-    ? await getImage({ src: mockup, width: Math.min(PHOTO_WIDTH, mockup.width), format: "webp", quality: 80 })
-    : photo;
-  return { id, ...data, image: photo.src, hero: hero.src, card: card.src, thumb: thumb.src };
+  const heroSrc = mockup ?? image;
+  const hero = await getImage({
+    src: heroSrc,
+    width: Math.min(PHOTO_WIDTH, heroSrc.width),
+    widths: HERO_WIDTHS.filter((w) => w <= heroSrc.width),
+    format: "webp",
+    quality: 80,
+  });
+  return {
+    id,
+    ...data,
+    image: photo.src,
+    hero: hero.src,
+    heroSrcSet: hero.srcSet.attribute,
+    card: card.src,
+    thumb: thumb.src,
+  };
 }
 
 export async function loadProducts(): Promise<Product[]> {

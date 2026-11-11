@@ -42,6 +42,7 @@ export function previewProducts(draft: CapaDraft, products: Product[]): Product[
       ctaMessage: saved?.ctaMessage,
       image,
       hero: draft.image ?? saved?.hero,
+      heroSrcSet: draft.image ? undefined : saved?.heroSrcSet,
       thumb: draft.image ?? (saved ? saved.thumb : ""),
       colors,
     },
