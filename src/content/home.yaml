@@ -42,14 +42,14 @@ testimonials:
   text: Feedbacks que as clientes mandaram pelo WhatsApp após receber sua encomenda.
   items:
     - text: >-
+        Amei muito, ficou além das minhas expectativas! Já quero uma combinando
+        para o meu tablet.
+      photo: ../assets/depoimentos/testimonials/items/0/photo.webp
+    - text: >-
         Estou completamente encantada com a case do Kindle, ficou linda,
         delicada e super bem-feita. E o melhor, coube certinho, exatamente como
         eu queria! Dá para perceber o carinho, o capricho e a dedicação em cada
         detalhe.
-      photo: ../assets/depoimentos/testimonials/items/0/photo.webp
-    - text: >-
-        Amei muito, ficou além das minhas expectativas! Já quero uma combinando
-        para o meu tablet.
       photo: ../assets/depoimentos/testimonials/items/1/photo.webp
     - text: >-
         Que trabalho primoroso! É a coisa mais linda! Sem dúvidas as bolsinhas
