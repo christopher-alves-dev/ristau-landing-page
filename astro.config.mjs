@@ -9,8 +9,8 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  // Trocar pelo domínio próprio quando ele for registrado.
-  site: 'https://ristau-landing-page.vercel.app',
+  // Domínio principal: ristau.com.br redireciona para o www na Vercel.
+  site: 'https://www.ristau.com.br',
   adapter: vercel(),
   integrations: [react(), keystatic(), sitemap({ filter: (page) => !/\/(preview|keystatic|admin)/.test(page) })],
   redirects: { '/admin': '/keystatic' },
