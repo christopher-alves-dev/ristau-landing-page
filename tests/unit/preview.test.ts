@@ -17,6 +17,12 @@ describe("previewProducts", () => {
     expect(capa.colors).toEqual({ ...first.colors, bg: "#123456" });
   });
 
+  it("mantém a foto com Kindle até a foto da capa mudar", () => {
+    const withHero = products.map((p) => ({ ...p, hero: `${p.image}-kindle` }));
+    expect(previewProducts({ slug: first.id }, withHero)[0].hero).toBe(`${first.image}-kindle`);
+    expect(previewProducts({ slug: first.id, image: "blob:foto" }, withHero)[0].hero).toBe("blob:foto");
+  });
+
   it("mostra a foto nova assim que ela é escolhida", () => {
     const [capa] = previewProducts({ slug: first.id, image: "blob:foto" }, products);
     expect(capa).toMatchObject({ image: "blob:foto", thumb: "blob:foto" });
@@ -25,7 +31,7 @@ describe("previewProducts", () => {
   it("numa capa nova mantém as outras e usa textos de exemplo", () => {
     const list = previewProducts({ slug: "" }, products);
     expect(list).toHaveLength(products.length + 1);
-    expect(list[0]).toMatchObject({ name: "Nome da capa", word: "Palavra", image: "" });
+    expect(list[0]).toMatchObject({ name: "Nome da capa", image: "" });
   });
 });
 

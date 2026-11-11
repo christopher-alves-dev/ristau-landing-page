@@ -33,7 +33,6 @@ export default config({
       columns: ["name", "price"],
       schema: {
         name: capaName(),
-        word: liveText("word", "Palavra de fundo", { description: "Palavra grande que aparece atrás da capa." }),
         description: liveText("description", "Descrição", { multiline: true }),
         price: price(),
         image: photo("Foto"),
@@ -54,7 +53,6 @@ export default config({
       format: { data: "yaml" },
       schema: {
         name: customName(),
-        word: liveText("word", "Palavra de fundo", { description: "Palavra grande que aparece atrás da capa." }),
         description: liveText("description", "Descrição", { multiline: true }),
         cta: liveText("cta", "Texto do botão", {}),
         ctaMessage: requiredText("Mensagem enviada no WhatsApp", { multiline: true }),

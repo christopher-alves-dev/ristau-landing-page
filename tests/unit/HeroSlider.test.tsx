@@ -19,6 +19,14 @@ describe("HeroSlider com a capa personalizada", () => {
   });
 });
 
+describe("HeroSlider · foto da hero", () => {
+  it("usa a versão com Kindle na foto grande e a original na miniatura", () => {
+    render(<HeroSlider products={[{ ...first, hero: "/_astro/com-kindle.webp" }, second]} site={site} />);
+    expect(screen.getByRole("img", { name: `Capa de Kindle em crochê ${first.name}` })).toHaveAttribute("src", "/_astro/com-kindle.webp");
+    expect(screen.getByRole("tab", { name: first.name }).querySelector("img")).toHaveAttribute("src", first.thumb);
+  });
+});
+
 describe("HeroSlider", () => {
   beforeEach(() => {
     render(<HeroSlider products={products} site={site} />);
@@ -74,6 +82,14 @@ describe("HeroSlider", () => {
     vi.spyOn(hero, "getBoundingClientRect").mockReturnValue({ top: -window.innerHeight, bottom: 0 } as DOMRect);
     await userEvent.setup().keyboard("{ArrowRight}");
     expect(heading()).toHaveTextContent(first.name);
+  });
+
+  it("troca de capa pelas setas ao lado da foto", async () => {
+    const [prev, next] = document.querySelectorAll<HTMLButtonElement>('button[aria-hidden="true"]');
+    await userEvent.click(next);
+    expect(await screen.findByRole("heading", { name: second.name })).toBeInTheDocument();
+    await userEvent.click(prev);
+    expect(await screen.findByRole("heading", { name: first.name })).toBeInTheDocument();
   });
 
   it("monta o link do WhatsApp com o nome da capa atual", () => {

@@ -36,50 +36,6 @@ export default function HomeSections({ features, steps, testimonials, faq, site,
           </div>
         </section>
 
-        {catalog.length > 0 && (
-          <section id="capas" aria-labelledby="capas-titulo" className="mx-auto max-w-7xl px-6 pb-24 md:px-10 md:pb-32">
-            <p className={eyebrowClass}>Catálogo</p>
-            <h2 id="capas-titulo" className={titleClass}>Todas as capas</h2>
-            <ul className="mt-14 grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-6 lg:grid-cols-4">
-              {catalog.map((p) => (
-                <li key={p.id}>
-                  <article className={`flex h-full flex-col rounded-3xl bg-white p-3 md:p-5 ${cardShadow}`}>
-                    <div className="grid aspect-[4/5] place-items-center rounded-2xl p-3 md:p-5" style={{ backgroundColor: p.colors.bg }}>
-                      <img
-                        src={p.card ?? p.image}
-                        alt={`Capa de Kindle em crochê ${p.name}`}
-                        loading="lazy"
-                        decoding="async"
-                        className="max-h-full w-auto object-contain"
-                      />
-                    </div>
-                    <h3 className="font-display mt-4 text-lg leading-tight font-bold md:text-xl">{p.name}</h3>
-                    <div className="mt-2 flex-1">
-                      <p className="line-clamp-3 text-sm leading-relaxed opacity-75">{p.description}</p>
-                    </div>
-                    <div className="mt-4 flex flex-wrap items-end justify-between gap-3">
-                      <span className="text-xs leading-tight whitespace-nowrap opacity-80">
-                        a partir de
-                        <strong className="block text-lg">{p.price}</strong>
-                      </span>
-                      <a
-                        href={whatsappLink(site.whatsapp, `Olá! Quero encomendar a capa ${p.name} para o meu Kindle.`)}
-                        target="_blank"
-                        rel="noreferrer"
-                        aria-label={`Quero a capa ${p.name}`}
-                        className="rounded-full px-4 py-2 text-sm font-semibold whitespace-nowrap text-white transition-transform hover:scale-105"
-                        style={{ backgroundColor: p.colors.accent }}
-                      >
-                        Quero essa
-                      </a>
-                    </div>
-                  </article>
-                </li>
-              ))}
-            </ul>
-          </section>
-        )}
-
         <section id="como-encomendar" className="bg-ink text-cream">
           <div className="mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-32">
             <p className="text-sm font-semibold tracking-[0.2em] text-[#f4a3b8] uppercase">{steps.eyebrow}</p>
@@ -139,6 +95,50 @@ export default function HomeSections({ features, steps, testimonials, faq, site,
             </div>
           </div>
         </section>
+
+        {catalog.length > 0 && (
+          <section id="capas" aria-labelledby="capas-titulo" className="mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-32">
+            <p className={eyebrowClass}>Catálogo</p>
+            <h2 id="capas-titulo" className={titleClass}>Todas as capas</h2>
+            <ul className="mt-14 grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-6 lg:grid-cols-4">
+              {catalog.map((p) => (
+                <li key={p.id}>
+                  <article className={`flex h-full flex-col rounded-3xl bg-white p-3 md:p-5 ${cardShadow}`}>
+                    <div className="grid aspect-[4/5] place-items-center rounded-2xl p-3 md:p-5" style={{ backgroundColor: p.colors.bg }}>
+                      <img
+                        src={p.card ?? p.image}
+                        alt={`Capa de Kindle em crochê ${p.name}`}
+                        loading="lazy"
+                        decoding="async"
+                        className="max-h-full w-auto object-contain"
+                      />
+                    </div>
+                    <h3 className="font-display mt-4 text-lg leading-tight font-bold md:text-xl">{p.name}</h3>
+                    <div className="mt-2 flex-1">
+                      <p className="line-clamp-3 text-sm leading-relaxed opacity-75">{p.description}</p>
+                    </div>
+                    <div className="mt-4 flex flex-wrap items-end justify-between gap-3">
+                      <span className="text-xs leading-tight whitespace-nowrap opacity-80">
+                        a partir de
+                        <strong className="block text-lg">{p.price}</strong>
+                      </span>
+                      <a
+                        href={whatsappLink(site.whatsapp, `Olá! Quero encomendar a capa ${p.name} para o meu Kindle.`)}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={`Quero a capa ${p.name}`}
+                        className="rounded-full px-4 py-2 text-sm font-semibold whitespace-nowrap text-white transition-transform hover:scale-105"
+                        style={{ backgroundColor: p.colors.accent }}
+                      >
+                        Quero essa
+                      </a>
+                    </div>
+                  </article>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
       </main>
 
       <footer

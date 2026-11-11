@@ -17,7 +17,6 @@ const capas = defineCollection({
   schema: ({ image }) =>
     z.object({
       name: z.string().min(1),
-      word: z.string().min(1),
       description: z.string().min(1),
       price: z.string().regex(PRICE_REGEX),
       image: image(),
@@ -35,7 +34,6 @@ const personalizada = defineCollection({
   schema: ({ image }) =>
     z.object({
       name: z.string().min(1),
-      word: z.string().min(1),
       description: z.string().min(1),
       cta: z.string().min(1),
       ctaMessage: z.string().min(1),
