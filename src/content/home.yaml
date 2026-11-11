@@ -39,24 +39,25 @@ steps:
 testimonials:
   eyebrow: Depoimentos
   title: Quem recebe, se apaixona.
-  text: Mensagens que as clientes mandaram pelo WhatsApp depois de receber a encomenda.
+  text: Feedbacks que as clientes mandaram pelo WhatsApp após receber sua encomenda.
   items:
     - text: >-
-        Estou completamente encantada com a case do Kindle, ficou linda, delicada
-        e super bem-feita. E o melhor, coube certinho, exatamente como eu queria!
-        Dá para perceber o carinho, o capricho e a dedicação em cada detalhe.
-      photo: ../assets/depoimentos/rose.webp
+        Estou completamente encantada com a case do Kindle, ficou linda,
+        delicada e super bem-feita. E o melhor, coube certinho, exatamente como
+        eu queria! Dá para perceber o carinho, o capricho e a dedicação em cada
+        detalhe.
+      photo: ../assets/depoimentos/testimonials/items/0/photo.webp
     - text: >-
         Amei muito, ficou além das minhas expectativas! Já quero uma combinando
         para o meu tablet.
-      photo: ../assets/depoimentos/oncinha.webp
+      photo: ../assets/depoimentos/testimonials/items/1/photo.webp
     - text: >-
-        Que trabalho primoroso! É a coisa mais linda! Sem dúvidas as bolsinhas de
-        Kindle mais lindas que eu já tive!
+        Que trabalho primoroso! É a coisa mais linda! Sem dúvidas as bolsinhas
+        de Kindle mais lindas que eu já tive!
     - text: >-
         Estou apaixonada, é mais linda ainda pessoalmente. Ficou perfeita mesmo
         com o pop socket.
-      photo: ../assets/depoimentos/bordo-tassel.webp
+      photo: ../assets/depoimentos/testimonials/items/3/photo.webp
     - text: >-
         Do primeiro contato até a entrega, você foi impecável. Seu trabalho é
         impecável. Já indiquei pra todo mundo!
@@ -64,29 +65,29 @@ testimonials:
         Acabei de receber minha encomenda e estou simplesmente apaixonada. Por
         foto e vídeo tudo é tão lindo, mas ao vivo a experiência transcende. A
         expectativa foi superada com sucesso!
-      photo: ../assets/depoimentos/encomenda.webp
+      photo: ../assets/depoimentos/testimonials/items/5/photo.webp
     - text: >-
         Apaixonada pela capa, serviu certinho. Não tenho palavras pra elogiar e
         agradecer. Amei demais!
     - text: Ficou perfeito! Eu amei muito. Já quero mais!
-      photo: ../assets/depoimentos/listrada.webp
+      photo: ../assets/depoimentos/testimonials/items/7/photo.webp
     - text: >-
         É muito mais linda pessoalmente, tô apaixonada na capinha e no mimo.
         Quanto carinho e capricho!
     - text: Chegou tudo direitinho. Lindo demais! Impecável o seu trabalho.
-      photo: ../assets/depoimentos/bordo-laco.webp
+      photo: ../assets/depoimentos/testimonials/items/9/photo.webp
     - text: >-
         Você trabalha com amor. Conseguimos sentir esse amor quando recebemos as
         nossas caixinhas.
     - text: Olha o que chegou, eu amei! Muito obrigada mesmo.
-      photo: ../assets/depoimentos/degrade.webp
+      photo: ../assets/depoimentos/testimonials/items/11/photo.webp
     - text: >-
         Recebi e amei, muito mais lindo pessoalmente. Que trabalho perfeito,
         muito caprichosa.
     - text: Chegou! Amei demais, amei o mimo, amei a bolsa.
-      photo: ../assets/depoimentos/bordo-corrente.webp
+      photo: ../assets/depoimentos/testimonials/items/13/photo.webp
     - text: Acabei de pegar na portaria. Amei, muito obrigada!
-      photo: ../assets/depoimentos/poa.webp
+      photo: ../assets/depoimentos/testimonials/items/14/photo.webp
 faq:
   eyebrow: Dúvidas
   title: Perguntas frequentes
@@ -98,23 +99,22 @@ faq:
         a produção, pedimos as dimensões do seu aparelho, para a capa ficar sob
         medida.
     - question: Qual é o prazo de produção?
-      answer: >-
-        Em média 15 dias úteis, mas normalmente enviamos na metade desse prazo.
+      answer: Em média 15 dias úteis, mas normalmente enviamos na metade desse prazo.
     - question: Como funciona o frete?
       answer: >-
         As capas saem de Palhoça (SC). Usamos o Melhor Envio para encontrar as
         melhores opções de entrega para o seu endereço.
     - question: Quem faz as capas?
-      answer: >-
-        Eu, Susan Ristau. Cada capa é feita à mão, em crochê, ponto a ponto.
+      answer: Eu, Susan Ristau. Cada capa é feita à mão, em crochê, ponto a ponto.
     - question: Como faço o pedido?
       answer: >-
         Pelo WhatsApp. Você escolhe a cor na cartela de mais de 70 opções e os
-        itens adicionais, como alça de mão, inicial do nome, laço com ponteiras e
-        chaveiro tassel.
+        itens adicionais, como alça de mão, inicial do nome, laço com ponteiras
+        e chaveiro tassel.
     - question: A capa é uma boa opção de presente?
       answer: >-
-        Sim. É um presente artesanal e personalizado para quem gosta de ler: você
-        escolhe as cores e pode incluir a inicial do nome de quem vai ganhar.
+        Sim. É um presente artesanal e personalizado para quem gosta de ler:
+        você escolhe as cores e pode incluir a inicial do nome de quem vai
+        ganhar.
     - question: Como cuidar da capa?
       answer: Não lave na máquina de lavar.
