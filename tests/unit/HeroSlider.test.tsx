@@ -7,7 +7,7 @@ import { products, site } from "./fixtures/hero";
 const [first, second] = products;
 const last = products.at(-1)!;
 
-const heading = () => screen.getByRole("heading", { level: 1 });
+const heading = () => screen.getByRole("heading", { level: 2 });
 
 describe("HeroSlider com a capa personalizada", () => {
   it("usa o botão e a mensagem próprios e esconde o preço", () => {

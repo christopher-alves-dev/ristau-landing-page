@@ -14,10 +14,12 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
-    "test:e2e:ui": "playwright test --ui"
+    "test:e2e:ui": "playwright test --ui",
+    "og": "node scripts/og.mjs"
   },
   "dependencies": {
     "@astrojs/react": "^7.1.1",
+    "@astrojs/sitemap": "^3.7.4",
     "@astrojs/vercel": "^11.0.20",
     "@keystatic/astro": "^6.0.0",
     "@keystatic/core": "^0.6.9",

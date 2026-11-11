@@ -60,3 +60,12 @@ describe("changedSection", () => {
     expect(changedSection({ site: { whatsapp: "1" } }, { site: { whatsapp: "2" } })).toBeNull();
   });
 });
+
+describe("previewHome · depoimentos", () => {
+  it("mantém a foto salva enquanto o rascunho não tem URL", async () => {
+    const { previewHome } = await import("../../src/data/preview");
+    const { home } = await import("./fixtures/home");
+    const draft = { testimonials: { ...home.testimonials, items: [{ text: "Novo texto", photo: null }] } };
+    expect(previewHome(draft, home).testimonials.items[0]).toEqual({ text: "Novo texto", photo: "/_astro/foto.webp" });
+  });
+});

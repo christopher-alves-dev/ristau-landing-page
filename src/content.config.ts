@@ -60,7 +60,7 @@ const site = defineCollection({
 
 const home = defineCollection({
   loader: single("home"),
-  schema: z.object({
+  schema: ({ image }) => z.object({
     features: z.object({
       eyebrow: z.string(),
       title: z.string(),
@@ -79,6 +79,17 @@ const home = defineCollection({
       items: z.array(z.object({ title: z.string(), text: z.string() })),
       cta: z.string(),
       ctaMessage: z.string(),
+    }),
+    testimonials: z.object({
+      eyebrow: z.string(),
+      title: z.string(),
+      text: z.string().optional(),
+      items: z.array(z.object({ text: z.string().min(1), photo: image().nullish() })),
+    }),
+    faq: z.object({
+      eyebrow: z.string(),
+      title: z.string(),
+      items: z.array(z.object({ question: z.string().min(1), answer: z.string().min(1) })),
     }),
   }),
 });

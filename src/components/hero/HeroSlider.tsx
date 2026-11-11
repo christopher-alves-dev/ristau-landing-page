@@ -196,7 +196,9 @@ export default function HeroSlider({ products, site }: Props) {
         </a>
         <nav className="hidden items-center gap-8 text-sm font-semibold md:flex">
           <a href="#feito-a-mao" className="hover:opacity-70">Feito à mão</a>
+          <a href="#capas" className="hover:opacity-70">Capas</a>
           <a href="#como-encomendar" className="hover:opacity-70">Como encomendar</a>
+          <a href="#duvidas" className="hover:opacity-70">Dúvidas</a>
           <a href={site.instagram} target="_blank" rel="noreferrer" className="hover:opacity-70">Instagram</a>
           {site.tiktok && (
             <a href={site.tiktok} target="_blank" rel="noreferrer" className="hover:opacity-70">TikTok</a>
@@ -226,12 +228,13 @@ export default function HeroSlider({ products, site }: Props) {
 
       <div className="mx-auto grid w-full max-w-7xl flex-1 grid-cols-1 items-center gap-6 px-6 pt-24 pb-36 md:grid-cols-[1fr_1.1fr] md:gap-10 md:px-10 md:pb-32">
         <div className="relative order-2 min-h-56 md:order-1" aria-live="polite">
+          <h1 className="sr-only">Capas de Kindle em crochê feitas à mão · {site.brand}</h1>
           <p className="text-sm font-semibold tracking-[0.2em] uppercase opacity-70">{site.slogan}</p>
           <AnimatePresence mode="wait" initial={false}>
             <motion.div key={product.id} variants={textContainer} initial="enter" animate="center" exit="exit">
-              <motion.h1 variants={textItem} className="font-display mt-3 text-5xl leading-[0.95] font-black md:text-7xl">
+              <motion.h2 variants={textItem} className="font-display mt-3 text-5xl leading-[0.95] font-black md:text-7xl">
                 {product.name}
-              </motion.h1>
+              </motion.h2>
               <motion.p variants={textItem} className="mt-5 max-w-md text-base leading-relaxed opacity-80 md:text-lg">
                 {product.description}
               </motion.p>
@@ -275,7 +278,7 @@ export default function HeroSlider({ products, site }: Props) {
                   src={product.image}
                   alt={`Capa de Kindle em crochê ${product.name}`}
                   draggable={false}
-                  className="h-full w-auto select-none"
+                  className="h-full w-auto object-contain select-none"
                   style={{ filter: `drop-shadow(0 40px 40px ${product.colors.ink}40)` }}
                   animate={reduceMotion ? undefined : { y: [0, -16, 0] }}
                   transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}

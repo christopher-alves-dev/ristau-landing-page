@@ -45,7 +45,7 @@ export default function PagePreview({ products, site, home }: Props) {
   return (
     <>
       <HeroSlider products={draft.capa ? previewProducts(draft.capa, products) : products} site={liveSite} />
-      <HomeSections {...previewHome(draft.home, home)} site={liveSite} />
+      <HomeSections {...previewHome(draft.home, home)} site={liveSite} products={products} />
     </>
   );
 }

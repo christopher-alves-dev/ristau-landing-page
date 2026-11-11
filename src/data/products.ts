@@ -7,6 +7,7 @@ export type Product = {
   cta?: string;
   ctaMessage?: string;
   image: string;
+  card?: string;
   thumb: string;
   colors: {
     bg: string;
