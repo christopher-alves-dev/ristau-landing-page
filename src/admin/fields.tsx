@@ -46,7 +46,7 @@ export function customName() {
   };
 }
 
-export function liveText(key: "word" | "description" | "cta", label: string, extra: { description?: string; multiline?: boolean }) {
+export function liveText(key: "description" | "cta", label: string, extra: { description?: string; multiline?: boolean }) {
   const base = fields.text({ label, ...extra, validation: { isRequired: true } });
   return {
     ...base,

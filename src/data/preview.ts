@@ -11,7 +11,6 @@ export type CapaDraft = {
   /** Slug da capa quando o formulário abriu; vazio numa capa nova. */
   slug?: string;
   name?: string;
-  word?: string;
   description?: string;
   price?: string;
   cta?: string;
@@ -37,12 +36,12 @@ export function previewProducts(draft: CapaDraft, products: Product[]): Product[
     {
       id: PREVIEW_ID,
       name: draft.name || "Nome da capa",
-      word: draft.word || "Palavra",
       description: draft.description ?? "",
       price: saved && !saved.price ? undefined : draft.price || "R$ 0",
       cta: draft.cta || saved?.cta,
       ctaMessage: saved?.ctaMessage,
       image,
+      hero: draft.image ?? saved?.hero,
       thumb: draft.image ?? (saved ? saved.thumb : ""),
       colors,
     },
