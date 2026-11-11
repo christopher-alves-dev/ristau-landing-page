@@ -11,7 +11,6 @@ export type CapaDraft = {
   /** Slug da capa quando o formulário abriu; vazio numa capa nova. */
   slug?: string;
   name?: string;
-  word?: string;
   description?: string;
   price?: string;
   cta?: string;
@@ -37,12 +36,12 @@ export function previewProducts(draft: CapaDraft, products: Product[]): Product[
     {
       id: PREVIEW_ID,
       name: draft.name || "Nome da capa",
-      word: draft.word || "Palavra",
       description: draft.description ?? "",
       price: saved && !saved.price ? undefined : draft.price || "R$ 0",
       cta: draft.cta || saved?.cta,
       ctaMessage: saved?.ctaMessage,
       image,
+      hero: draft.image ?? saved?.hero,
       thumb: draft.image ?? (saved ? saved.thumb : ""),
       colors,
     },
@@ -52,7 +51,7 @@ export function previewProducts(draft: CapaDraft, products: Product[]): Product[
 
 export type SiteDraft = Partial<Pick<Site, "brand" | "slogan" | "whatsapp" | "instagram" | "tiktok" | "footerText">>;
 export type Draft = { capa?: CapaDraft; site?: SiteDraft; home?: Partial<Home> };
-export type Section = "topo" | "feito-a-mao" | "como-encomendar" | "rodape";
+export type Section = "topo" | "feito-a-mao" | "como-encomendar" | "depoimentos" | "duvidas" | "rodape";
 
 const OPTIONAL: (keyof SiteDraft)[] = ["tiktok"];
 
@@ -63,7 +62,13 @@ export function previewSite(draft: SiteDraft | undefined, site: Site): Site {
 }
 
 export function previewHome(draft: Partial<Home> | undefined, home: Home): Home {
-  return { ...home, ...draft };
+  const merged = { ...home, ...draft };
+  if (!draft?.testimonials) return merged;
+  const items = draft.testimonials.items.map((item, i) => ({
+    ...item,
+    photo: typeof item.photo === "string" ? item.photo : home.testimonials.items[i]?.photo,
+  }));
+  return { ...merged, testimonials: { ...draft.testimonials, items } };
 }
 
 const SITE_SECTION: Record<keyof SiteDraft, Section | null> = {
@@ -86,6 +91,8 @@ export function changedSection(prev: Draft | null, next: Draft): Section | null 
   if (!same(prev.capa, next.capa)) return "topo";
   if (!same(prev.home?.features, next.home?.features)) return "feito-a-mao";
   if (!same(prev.home?.steps, next.home?.steps)) return "como-encomendar";
+  if (!same(prev.home?.testimonials, next.home?.testimonials)) return "depoimentos";
+  if (!same(prev.home?.faq, next.home?.faq)) return "duvidas";
   for (const key of Object.keys(SITE_SECTION) as (keyof SiteDraft)[]) {
     if (prev.site?.[key] !== next.site?.[key]) return SITE_SECTION[key];
   }

@@ -13,6 +13,8 @@ export function previewValue(props: PreviewProps): unknown {
   if ("fields" in props) {
     return Object.fromEntries(Object.entries(props.fields).map(([key, child]) => [key, previewValue(child)]));
   }
+  // Fotos novas ainda não têm URL; a prévia mantém a versão salva.
+  if (props.value?.data instanceof Uint8Array) return null;
   return props.value;
 }
 

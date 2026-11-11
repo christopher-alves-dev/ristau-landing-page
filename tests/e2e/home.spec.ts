@@ -3,8 +3,8 @@ import { expect, test, type Page } from "@playwright/test";
 type Capa = { name: string };
 let first: Capa, second: Capa, last: Capa, total: number;
 
-const heading = (page: Page) => page.getByRole("heading", { level: 1 });
 const hero = (page: Page) => page.getByRole("region", { name: "Capas de Kindle em crochê" });
+const heading = (page: Page) => hero(page).getByRole("heading", { level: 2 });
 
 test.beforeEach(async ({ page }) => {
   // Os scripts do Vercel Analytics e do Speed Insights só existem no deploy da Vercel.
@@ -22,7 +22,7 @@ test.beforeEach(async ({ page }) => {
 test("carrega a página com título e primeira capa", async ({ page }) => {
   await expect(page).toHaveTitle(/Capas de Kindle em crochê/);
   await expect(heading(page)).toHaveText(first.name);
-  await expect(page.getByRole("img", { name: `Capa de Kindle em crochê ${first.name}` })).toBeVisible();
+  await expect(hero(page).getByRole("img", { name: `Capa de Kindle em crochê ${first.name}` })).toBeVisible();
 });
 
 test("não gera erros no console", async ({ page }) => {
@@ -74,8 +74,17 @@ test("o botão de compra leva ao WhatsApp com a capa escolhida", async ({ page }
 
 test("mostra as seções e o link final do WhatsApp", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "Seu Kindle protegido e de roupa nova." })).toBeAttached();
-  await expect(page.getByRole("heading", { name: "Três passos e pronto." })).toBeAttached();
+  await expect(page.locator("#como-encomendar h2")).toBeAttached();
   await expect(page.getByRole("link", { name: "Pedir a minha pelo WhatsApp" })).toHaveAttribute("href", /^https:\/\/wa\.me\//);
+});
+
+test("a página traz catálogo, depoimentos e dúvidas no HTML", async ({ page }) => {
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(/Capas de Kindle em crochê/);
+  const catalog = page.getByRole("region", { name: "Todas as capas" });
+  await expect(catalog.getByRole("listitem")).toHaveCount(total - 1);
+  await expect(page.getByRole("region", { name: "Quem recebe, se apaixona." }).locator("blockquote").first()).toBeAttached();
+  await expect(page.getByRole("region", { name: "Perguntas frequentes" }).getByText("Qual é o prazo de produção?")).toBeAttached();
+  await expect(page.locator('script[type="application/ld+json"]')).toHaveCount(1);
 });
 
 test.describe("desktop", () => {
@@ -108,7 +117,7 @@ test.describe("desktop", () => {
   test("o menu leva às seções da página", async ({ page }) => {
     await page.getByRole("link", { name: "Como encomendar" }).click();
     await expect(page).toHaveURL(/#como-encomendar$/);
-    await expect(page.getByRole("heading", { name: "Três passos e pronto." })).toBeInViewport();
+    await expect(page.locator("#como-encomendar h2")).toBeInViewport();
   });
 });
 
@@ -116,7 +125,7 @@ test.describe("mobile", () => {
   test.skip(({ isMobile }) => !isMobile, "gesto de arrastar só no celular");
 
   test("arrastar a capa para o lado troca de capa", async ({ page }) => {
-    const img = page.getByRole("img", { name: `Capa de Kindle em crochê ${first.name}` });
+    const img = hero(page).getByRole("img", { name: `Capa de Kindle em crochê ${first.name}` });
     const box = (await img.boundingBox())!;
     const y = box.y + box.height / 2;
     await page.mouse.move(box.x + box.width * 0.8, y);

@@ -11,4 +11,15 @@ export type Home = {
     cta: string;
     ctaMessage: string;
   };
+  testimonials: {
+    eyebrow: string;
+    title: string;
+    text?: string;
+    items: { text: string; photo?: string | null }[];
+  };
+  faq: {
+    eyebrow: string;
+    title: string;
+    items: { question: string; answer: string }[];
+  };
 };

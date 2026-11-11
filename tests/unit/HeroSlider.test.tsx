@@ -7,7 +7,7 @@ import { products, site } from "./fixtures/hero";
 const [first, second] = products;
 const last = products.at(-1)!;
 
-const heading = () => screen.getByRole("heading", { level: 1 });
+const heading = () => screen.getByRole("heading", { level: 2 });
 
 describe("HeroSlider com a capa personalizada", () => {
   it("usa o botão e a mensagem próprios e esconde o preço", () => {
@@ -16,6 +16,14 @@ describe("HeroSlider com a capa personalizada", () => {
     const link = screen.getByRole("link", { name: "Criar a minha" });
     expect(decodeURIComponent(link.getAttribute("href")!)).toContain("Quero personalizar");
     expect(screen.queryByText(/a partir de/)).not.toBeInTheDocument();
+  });
+});
+
+describe("HeroSlider · foto da hero", () => {
+  it("usa a versão com Kindle na foto grande e a original na miniatura", () => {
+    render(<HeroSlider products={[{ ...first, hero: "/_astro/com-kindle.webp" }, second]} site={site} />);
+    expect(screen.getByRole("img", { name: `Capa de Kindle em crochê ${first.name}` })).toHaveAttribute("src", "/_astro/com-kindle.webp");
+    expect(screen.getByRole("tab", { name: first.name }).querySelector("img")).toHaveAttribute("src", first.thumb);
   });
 });
 
@@ -74,6 +82,14 @@ describe("HeroSlider", () => {
     vi.spyOn(hero, "getBoundingClientRect").mockReturnValue({ top: -window.innerHeight, bottom: 0 } as DOMRect);
     await userEvent.setup().keyboard("{ArrowRight}");
     expect(heading()).toHaveTextContent(first.name);
+  });
+
+  it("troca de capa pelas setas ao lado da foto", async () => {
+    const [prev, next] = document.querySelectorAll<HTMLButtonElement>('button[aria-hidden="true"]');
+    await userEvent.click(next);
+    expect(await screen.findByRole("heading", { name: second.name })).toBeInTheDocument();
+    await userEvent.click(prev);
+    expect(await screen.findByRole("heading", { name: first.name })).toBeInTheDocument();
   });
 
   it("monta o link do WhatsApp com o nome da capa atual", () => {

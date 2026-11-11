@@ -33,7 +33,6 @@ export default config({
       columns: ["name", "price"],
       schema: {
         name: capaName(),
-        word: liveText("word", "Palavra de fundo", { description: "Palavra grande que aparece atrás da capa." }),
         description: liveText("description", "Descrição", { multiline: true }),
         price: price(),
         image: photo("Foto"),
@@ -54,7 +53,6 @@ export default config({
       format: { data: "yaml" },
       schema: {
         name: customName(),
-        word: liveText("word", "Palavra de fundo", { description: "Palavra grande que aparece atrás da capa." }),
         description: liveText("description", "Descrição", { multiline: true }),
         cta: liveText("cta", "Texto do botão", {}),
         ctaMessage: requiredText("Mensagem enviada no WhatsApp", { multiline: true }),
@@ -122,6 +120,46 @@ export default config({
               ctaMessage: requiredText("Mensagem enviada no WhatsApp", { multiline: true }),
             },
             { label: "Como encomendar" },
+          ),
+        ),
+        testimonials: homeSection(
+          "testimonials",
+          fields.object(
+            {
+              eyebrow: requiredText("Chamada"),
+              title: requiredText("Título"),
+              text: fields.text({ label: "Texto", multiline: true }),
+              items: fields.array(
+                fields.object({
+                  text: requiredText("Depoimento", { multiline: true }),
+                  photo: fields.image({
+                    label: "Foto (opcional)",
+                    description: "Recorte só a capa: sem nomes, telefones ou rostos.",
+                    directory: "src/assets/depoimentos",
+                    publicPath: "../assets/depoimentos/",
+                  }),
+                }),
+                { label: "Depoimentos", itemLabel: (props) => props.fields.text.value.slice(0, 60) },
+              ),
+            },
+            { label: "Depoimentos" },
+          ),
+        ),
+        faq: homeSection(
+          "faq",
+          fields.object(
+            {
+              eyebrow: requiredText("Chamada"),
+              title: requiredText("Título"),
+              items: fields.array(
+                fields.object({
+                  question: requiredText("Pergunta"),
+                  answer: requiredText("Resposta", { multiline: true }),
+                }),
+                { label: "Perguntas", itemLabel: (props) => props.fields.question.value },
+              ),
+            },
+            { label: "Perguntas frequentes" },
           ),
         ),
       },

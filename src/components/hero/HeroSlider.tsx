@@ -35,12 +35,6 @@ const productVariants: Variants = {
   }),
 };
 
-const wordVariants: Variants = {
-  enter: (dir: number) => ({ y: dir >= 0 ? "100%" : "-100%" }),
-  center: { y: 0, transition: { duration: 0.9, ease: EASE_OUT } },
-  exit: (dir: number) => ({ y: dir >= 0 ? "-100%" : "100%", transition: { duration: 0.5, ease: "easeIn" } }),
-};
-
 const textContainer: Variants = {
   center: { transition: { staggerChildren: 0.07, delayChildren: 0.15 } },
   exit: { transition: { staggerChildren: 0.04, staggerDirection: -1 } },
@@ -53,6 +47,23 @@ const textItem: Variants = {
 };
 
 type Props = { products: Product[]; site: Site };
+
+// Atalho visual ao lado da capa; os botões acessíveis ficam no rodapé da hero.
+function SideArrow({ dir, onClick }: { dir: -1 | 1; onClick: () => void }) {
+  return (
+    <button
+      type="button"
+      aria-hidden
+      tabIndex={-1}
+      onClick={onClick}
+      className="relative z-10 grid size-10 shrink-0 place-items-center rounded-full border-2 border-current bg-white/30 opacity-70 backdrop-blur-sm transition hover:scale-110 hover:bg-white/50 hover:opacity-100"
+    >
+      <svg viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d={dir < 0 ? "M15 18l-6-6 6-6" : "M9 6l6 6-6 6"} />
+      </svg>
+    </button>
+  );
+}
 
 export default function HeroSlider({ products, site }: Props) {
   const [[index, direction], setSlide] = useState<[number, number]>([0, 0]);
@@ -191,12 +202,17 @@ export default function HeroSlider({ products, site }: Props) {
       <Decorations mx={smx} my={smy} index={index} color={product.colors.accent} />
 
       <header className="absolute inset-x-0 top-0 z-10 mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-5 md:px-10 md:py-7">
-        <a href="/" className="-my-2 block">
+        <a href="/" className="-my-2 flex items-center gap-3 md:gap-4">
           <img src={site.logo} alt={site.brand} width={94} height={80} className="h-16 w-auto md:h-20" />
+          <span className="max-w-[14rem] border-l border-current/25 pl-3 text-xs leading-snug font-semibold tracking-[0.15em] uppercase opacity-80 md:max-w-[17rem] md:pl-4 md:text-sm">
+            {site.slogan}
+          </span>
         </a>
-        <nav className="hidden items-center gap-8 text-sm font-semibold md:flex">
+        <nav className="hidden items-center gap-5 text-sm font-semibold whitespace-nowrap lg:flex xl:gap-8">
           <a href="#feito-a-mao" className="hover:opacity-70">Feito à mão</a>
           <a href="#como-encomendar" className="hover:opacity-70">Como encomendar</a>
+          <a href="#duvidas" className="hover:opacity-70">Dúvidas</a>
+          <a href="#capas" className="hover:opacity-70">Capas</a>
           <a href={site.instagram} target="_blank" rel="noreferrer" className="hover:opacity-70">Instagram</a>
           {site.tiktok && (
             <a href={site.tiktok} target="_blank" rel="noreferrer" className="hover:opacity-70">TikTok</a>
@@ -208,30 +224,19 @@ export default function HeroSlider({ products, site }: Props) {
         aria-hidden
         className="pointer-events-none absolute inset-x-0 top-1/2 -z-10 -translate-y-1/2 overflow-hidden text-center leading-none"
       >
-        <AnimatePresence initial={false} custom={direction}>
-          <motion.span
-            key={product.id}
-            custom={direction}
-            variants={wordVariants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            className="font-display absolute inset-x-0 top-0 block text-[28vw] font-black tracking-tight whitespace-nowrap uppercase opacity-15 md:text-[22vw]"
-          >
-            {product.word}
-          </motion.span>
-        </AnimatePresence>
-        <span className="font-display invisible block text-[28vw] font-black uppercase md:text-[22vw]">.</span>
+        <span className="font-display block text-[28vw] font-black tracking-tight whitespace-nowrap uppercase opacity-15 md:text-[22vw]">
+          Kindle
+        </span>
       </div>
 
-      <div className="mx-auto grid w-full max-w-7xl flex-1 grid-cols-1 items-center gap-6 px-6 pt-24 pb-36 md:grid-cols-[1fr_1.1fr] md:gap-10 md:px-10 md:pb-32">
-        <div className="relative order-2 min-h-56 md:order-1" aria-live="polite">
-          <p className="text-sm font-semibold tracking-[0.2em] uppercase opacity-70">{site.slogan}</p>
+      <div className="mx-auto grid w-full max-w-7xl flex-1 grid-cols-1 items-center gap-6 px-6 pt-24 pb-36 md:px-10 lg:grid-cols-[1fr_1.1fr] lg:gap-10 lg:pb-32">
+        <div className="relative order-2 min-h-56 lg:order-1" aria-live="polite">
+          <h1 className="text-sm font-semibold tracking-[0.2em] uppercase opacity-70">Capas de Kindle em crochê</h1>
           <AnimatePresence mode="wait" initial={false}>
             <motion.div key={product.id} variants={textContainer} initial="enter" animate="center" exit="exit">
-              <motion.h1 variants={textItem} className="font-display mt-3 text-5xl leading-[0.95] font-black md:text-7xl">
+              <motion.h2 variants={textItem} className="font-display mt-3 text-5xl leading-[0.95] font-black md:text-7xl">
                 {product.name}
-              </motion.h1>
+              </motion.h2>
               <motion.p variants={textItem} className="mt-5 max-w-md text-base leading-relaxed opacity-80 md:text-lg">
                 {product.description}
               </motion.p>
@@ -255,34 +260,41 @@ export default function HeroSlider({ products, site }: Props) {
           </AnimatePresence>
         </div>
 
-        <div className="relative order-1 flex h-[46svh] items-center justify-center md:order-2 md:h-[70svh]" style={{ perspective: 1200 }}>
-          <AnimatePresence initial={false} custom={direction}>
-            <motion.div
-              key={product.id}
-              custom={direction}
-              variants={reduceMotion ? undefined : productVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              drag="x"
-              dragConstraints={{ left: 0, right: 0 }}
-              dragElastic={0.5}
-              onDragEnd={onDragEnd}
-              className="absolute h-full cursor-grab touch-pan-y active:cursor-grabbing"
-            >
-              <motion.div style={{ rotateX: tiltX, rotateY: tiltY }} className="h-full">
-                <motion.img
-                  src={product.image}
-                  alt={`Capa de Kindle em crochê ${product.name}`}
-                  draggable={false}
-                  className="h-full w-auto select-none"
-                  style={{ filter: `drop-shadow(0 40px 40px ${product.colors.ink}40)` }}
-                  animate={reduceMotion ? undefined : { y: [0, -16, 0] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                />
-              </motion.div>
-            </motion.div>
-          </AnimatePresence>
+        <div className="relative order-1 flex h-[46svh] items-center gap-2 lg:order-2 lg:h-[70svh] lg:gap-6">
+          <SideArrow dir={-1} onClick={() => paginate(-1)} />
+          {/* O respiro lateral cobre os cantos da capa inclinada, para ela não passar por baixo das setas. */}
+          <div className="h-full flex-1 px-[6%] lg:px-[9%]">
+            <div className="relative flex h-full items-center justify-center" style={{ perspective: 1200 }}>
+              <AnimatePresence initial={false} custom={direction}>
+                <motion.div
+                  key={product.id}
+                  custom={direction}
+                  variants={reduceMotion ? undefined : productVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  drag="x"
+                  dragConstraints={{ left: 0, right: 0 }}
+                  dragElastic={0.5}
+                  onDragEnd={onDragEnd}
+                  className="absolute h-full cursor-grab touch-pan-y active:cursor-grabbing"
+                >
+                  <motion.div style={{ rotateX: tiltX, rotateY: tiltY }} className="h-full">
+                    <motion.img
+                      src={product.hero ?? product.image}
+                      alt={`Capa de Kindle em crochê ${product.name}`}
+                      draggable={false}
+                      className="h-full w-auto object-contain select-none"
+                      style={{ filter: `drop-shadow(0 40px 40px ${product.colors.ink}40)` }}
+                      animate={reduceMotion ? undefined : { y: [0, -16, 0] }}
+                      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                    />
+                  </motion.div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </div>
+          <SideArrow dir={1} onClick={() => paginate(1)} />
         </div>
       </div>
 

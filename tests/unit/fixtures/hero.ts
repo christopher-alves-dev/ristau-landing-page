@@ -6,7 +6,6 @@ const colors = { bg: "#ffffff", blob: "#eeeeee", accent: "#333333", ink: "#00000
 export const products: Product[] = ["Caramelo", "Aquarela", "Turquesa"].map((name) => ({
   id: name.toLowerCase(),
   name: `Capa ${name}`,
-  word: name,
   description: `Descrição da capa ${name}`,
   price: "R$ 89",
   image: `/_astro/${name}.webp`,

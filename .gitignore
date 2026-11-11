@@ -27,3 +27,6 @@ playwright/.cache/
 # vercel
 .vercel/
 .env*
+
+# mockups gerados no build (scripts/kindle-mockups.mjs)
+src/assets/mockups/
