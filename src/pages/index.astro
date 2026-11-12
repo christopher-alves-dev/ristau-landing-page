@@ -11,6 +11,6 @@ const jsonLd = structuredData({ site, products, home, url: new URL("/", Astro.si
 
 <Layout title={site.seoTitle} description={site.seoDescription} siteName={site.brand}>
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd).replaceAll("<", "\\u003c")} />
-  <HeroSlider client:load products={products} site={site} />
+  <HeroSlider client:idle products={products} site={site} />
   <HomeSections {...home} site={site} products={products} />
 </Layout>

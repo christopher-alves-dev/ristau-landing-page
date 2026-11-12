@@ -10,6 +10,7 @@ import {
 } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Product } from "../../data/products";
+import { readableButton } from "../../data/color";
 import { whatsappLink, type Site } from "../../data/site";
 import Decorations from "./Decorations";
 
@@ -245,8 +246,8 @@ export default function HeroSlider({ products, site }: Props) {
                   href={whatsappLink(site.whatsapp, product.ctaMessage ?? `Olá! Quero encomendar a capa ${product.name} para o meu Kindle.`)}
                   target="_blank"
                   rel="noreferrer"
-                  className="rounded-full px-7 py-4 font-semibold text-white shadow-lg transition-transform hover:scale-105 active:scale-95"
-                  style={{ backgroundColor: product.colors.accent }}
+                  className="rounded-full px-7 py-4 font-semibold shadow-lg transition-transform hover:scale-105 active:scale-95"
+                  style={readableButton(product.colors.accent)}
                 >
                   {product.cta ?? "Quero a minha"}
                 </a>
@@ -317,7 +318,7 @@ export default function HeroSlider({ products, site }: Props) {
               onClick={() => goTo(i, i > index ? 1 : -1)}
               className="relative size-12 shrink-0 rounded-2xl bg-white/40 p-1.5 backdrop-blur transition-transform hover:scale-110 sm:size-14 md:size-16"
             >
-              <img src={p.thumb} alt="" className="h-full w-full object-contain" />
+              <img src={p.thumb} alt="" loading="lazy" decoding="async" className="h-full w-full object-contain" />
               {i === index && (
                 <motion.span
                   layoutId="thumb-ring"

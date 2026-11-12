@@ -86,10 +86,10 @@ export function llmsText({ site, products, home, url }: { site: Site; products: 
     .join("\n");
   const faq = home.faq.items.map((i) => `### ${i.question}\n\n${i.answer.trim()}`).join("\n\n");
   const links = [
-    `- Site: ${url.href}`,
-    `- Encomendas pelo WhatsApp: https://wa.me/${site.whatsapp}`,
-    `- Instagram: ${site.instagram}`,
-    site.tiktok && `- TikTok: ${site.tiktok}`,
+    `- [Site](${url.href})`,
+    `- [Encomendas pelo WhatsApp](https://wa.me/${site.whatsapp})`,
+    `- [Instagram](${site.instagram})`,
+    site.tiktok && `- [TikTok](${site.tiktok})`,
   ]
     .filter(Boolean)
     .join("\n");
