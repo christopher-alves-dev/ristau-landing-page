@@ -1,5 +1,6 @@
 import type { Home } from "../data/home";
 import type { Product } from "../data/products";
+import { readableButton } from "../data/color";
 import { whatsappLink, type Site } from "../data/site";
 
 type Props = Home & { site: Site; products?: Product[] };
@@ -126,11 +127,10 @@ export default function HomeSections({ features, steps, testimonials, faq, site,
                         href={whatsappLink(site.whatsapp, `Olá! Quero encomendar a capa ${p.name} para o meu Kindle.`)}
                         target="_blank"
                         rel="noreferrer"
-                        aria-label={`Quero a capa ${p.name}`}
-                        className="rounded-full px-4 py-2 text-sm font-semibold whitespace-nowrap text-white transition-transform hover:scale-105"
-                        style={{ backgroundColor: p.colors.accent }}
+                        className="rounded-full px-4 py-2 text-sm font-semibold whitespace-nowrap transition-transform hover:scale-105"
+                        style={readableButton(p.colors.accent)}
                       >
-                        Quero essa
+                        Quero essa<span className="sr-only">: capa {p.name}</span>
                       </a>
                     </div>
                   </article>

@@ -14,6 +14,7 @@ export default defineConfig({
   adapter: vercel(),
   integrations: [react(), keystatic(), sitemap({ filter: (page) => !/\/(preview|keystatic|admin)/.test(page) })],
   redirects: { '/admin': '/keystatic' },
+  build: { inlineStylesheets: 'always' },
   fonts: [
     {
       provider: fontProviders.google(),
@@ -23,7 +24,6 @@ export default defineConfig({
       styles: ['normal'],
       subsets: ['latin'],
       fallbacks: ['sans-serif'],
-      options: { experimental: { variableAxis: { opsz: [['9', '40']] } } },
     },
     {
       provider: fontProviders.google(),
@@ -33,7 +33,6 @@ export default defineConfig({
       styles: ['normal'],
       subsets: ['latin'],
       fallbacks: ['serif'],
-      options: { experimental: { variableAxis: { opsz: [['9', '144']] } } },
     },
   ],
 

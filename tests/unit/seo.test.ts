@@ -45,4 +45,8 @@ describe("llmsText", () => {
     expect(text).toContain("### Serve no meu Kindle?");
     expect(text).not.toContain(custom.name);
   });
+
+  it("usa links em Markdown, como o Lighthouse exige", () => {
+    expect(llmsText(input)).toMatch(/\[Site\]\(https?:\/\/.+\)/);
+  });
 });

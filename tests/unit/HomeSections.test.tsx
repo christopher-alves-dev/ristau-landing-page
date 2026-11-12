@@ -29,7 +29,7 @@ describe("HomeSections · catálogo", () => {
     expect(catalog.getByRole("heading", { name: products[0].name })).toBeInTheDocument();
     expect(catalog.getByText(products[0].description)).toBeInTheDocument();
     expect(catalog.queryByText("Crie do seu jeito")).not.toBeInTheDocument();
-    expect(catalog.getByRole("link", { name: `Quero a capa ${products[0].name}` }).getAttribute("href")).toContain(
+    expect(catalog.getByRole("link", { name: `Quero essa: capa ${products[0].name}` }).getAttribute("href")).toContain(
       encodeURIComponent(products[0].name),
     );
   });
