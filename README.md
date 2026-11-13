@@ -6,6 +6,11 @@ A production landing page and product catalog for **Ristau**, a small Brazilian 
 
 The site is in Portuguese for its real customers, but the main engineering goal was to let a **non-technical owner** run the whole catalog (products, photos, prices, testimonials, FAQ) by herself, while the site stays fast, accessible and easy to find on search engines.
 
+[![Performance](https://img.shields.io/badge/Performance-98_mobile_·_100_desktop-0cce6b?logo=lighthouse&logoColor=white)](#performance)
+[![Accessibility](https://img.shields.io/badge/Accessibility-100-0cce6b?logo=lighthouse&logoColor=white)](#performance)
+[![Best Practices](https://img.shields.io/badge/Best_Practices-100-0cce6b?logo=lighthouse&logoColor=white)](#performance)
+[![SEO](https://img.shields.io/badge/SEO-100-0cce6b?logo=lighthouse&logoColor=white)](#performance)
+
 ![Astro](https://img.shields.io/badge/Astro-7-BC52EE?logo=astro&logoColor=white)
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-6-3178C6?logo=typescript&logoColor=white)
@@ -14,6 +19,23 @@ The site is in Portuguese for its real customers, but the main engineering goal 
 ![Vitest](https://img.shields.io/badge/Vitest-tested-6E9F18?logo=vitest&logoColor=white)
 ![Playwright](https://img.shields.io/badge/Playwright-e2e-2EAD33?logo=playwright&logoColor=white)
 ![Vercel](https://img.shields.io/badge/Deployed_on-Vercel-000000?logo=vercel&logoColor=white)
+
+## Performance
+
+<p align="center">
+  <a href="https://pagespeed.web.dev/analysis/https-www-ristau-com-br/f12xohrlqu?form_factor=mobile"><img src="docs/pagespeed/mobile.svg" alt="PageSpeed mobile: Performance 98, Accessibility 100, Best Practices 100, SEO 100" width="420"></a>
+  <a href="https://pagespeed.web.dev/analysis/https-www-ristau-com-br/f12xohrlqu?form_factor=desktop"><img src="docs/pagespeed/desktop.svg" alt="PageSpeed desktop: Performance 100, Accessibility 100, Best Practices 100, SEO 100" width="420"></a>
+</p>
+
+| Core Web Vitals          | Mobile (Slow 4G) | Desktop |
+| :----------------------- | :--------------: | :-----: |
+| Largest Contentful Paint |      1.7 s       |  0.4 s  |
+| First Contentful Paint   |      1.0 s       |  0.3 s  |
+| Total Blocking Time      |       0 ms       |  0 ms   |
+| Cumulative Layout Shift  |        0         |  0.016  |
+| Speed Index              |      3.8 s       |  0.4 s  |
+
+<p align="center"><sub>PageSpeed Insights · Lighthouse 13.6 · Nov 13, 2026 · <a href="https://pagespeed.web.dev/analysis/https-www-ristau-com-br/f12xohrlqu">full report →</a></sub></p>
 
 ## Highlights
 
