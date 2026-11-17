@@ -1,11 +1,12 @@
 import { fields } from "@keystatic/core";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { formatPriceInput, maskPrice, PRICE_REGEX, priceToCents } from "../data/price";
-import { MAX_UPLOAD_MB, uploadError } from "../data/uploads";
+import { uploadError } from "../data/uploads";
 import type { Home } from "../data/home";
 import { CUSTOM_ID, type SiteDraft } from "../data/preview";
 import { useDraft, usePublishCapa, usePublishColor, usePublishHome, usePublishImage, usePublishSite } from "./draft";
 import { ObjectFields, previewValue } from "./FormFields";
+import { optimizeImage } from "./optimizeImage";
 import { suggestPalette } from "./palette";
 import PreviewPanel from "./PreviewPanel";
 
@@ -116,21 +117,44 @@ export function photo(label: string, publicPath = "../") {
     label,
     publicPath,
     validation: { isRequired: true },
-    description: `PNG ou WebP com fundo transparente, até ${MAX_UPLOAD_MB} MB. O site gera as versões otimizadas sozinho.`,
+    description: "De preferência com fundo transparente. Pode enviar em qualquer tamanho: a foto é convertida para WebP e compactada automaticamente.",
   });
   return {
     ...base,
     Input(props: Parameters<typeof base.Input>[0]) {
       usePublishImage(props.value);
-      const error = uploadError(props.value);
+      const [status, setStatus] = useState<{ busy?: boolean; error?: string; warning?: string }>({});
+      const latest = useRef(0);
+
+      const onChange = async (value: Parameters<typeof props.onChange>[0]) => {
+        const run = ++latest.current;
+        if (!value) {
+          setStatus({});
+          return props.onChange(value);
+        }
+        setStatus({ busy: true });
+        try {
+          const { upload, transparent } = await optimizeImage(value);
+          if (run !== latest.current) return;
+          props.onChange(upload);
+          setStatus(transparent ? {} : { warning: "Essa foto não tem fundo transparente; no site o fundo vai aparecer atrás da capa." });
+        } catch (e) {
+          if (run === latest.current) setStatus({ error: e instanceof Error ? e.message : "Não foi possível otimizar a foto." });
+        }
+      };
+
+      const error = status.error ?? uploadError(props.value);
+      const message = (color: string, text: string, role?: "alert") => (
+        <p role={role} style={{ color, fontFamily: "system-ui, sans-serif", fontSize: 14, marginTop: 8 }}>
+          {text}
+        </p>
+      );
       return (
         <>
-          <base.Input {...props} />
-          {error && (
-            <p role="alert" style={{ color: "#c0392b", fontFamily: "system-ui, sans-serif", fontSize: 14, marginTop: 8 }}>
-              {error}
-            </p>
-          )}
+          <base.Input {...props} onChange={onChange} />
+          {status.busy && message("inherit", "Otimizando a foto…")}
+          {error && message("#c0392b", error, "alert")}
+          {status.warning && message("#b7791f", status.warning)}
         </>
       );
     },
