@@ -1,0 +1,12 @@
+name: Lançamento - Love Story
+description: >-
+  Para quem vive uma história de amor com os livros! Trama grossa cor framboesa
+  com coraçõezinhos rosa de poá, cordão com ponteiras douradas e inicial do
+  nome. Um charme!
+price: R$ 124
+image: ../lancamento-love-story/image.webp
+colors:
+  bg: '#f9e1ea'
+  blob: '#e7a3bd'
+  accent: '#a3285f'
+  ink: '#4a0f2a'
