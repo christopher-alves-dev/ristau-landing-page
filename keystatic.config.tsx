@@ -1,19 +1,21 @@
 import { collection, config, fields, singleton } from "@keystatic/core";
 import { capaOrder } from "./src/admin/CapaOrder";
-import { capaName, color, customName, homeSection, liveText, photo, price, siteText, siteUrl } from "./src/admin/fields";
+import { capaColors, capaName, color, customName, homeSection, liveText, photo, price, siteText, siteUrl } from "./src/admin/fields";
 
 const requiredText = (label: string, extra: { description?: string; multiline?: boolean } = {}) =>
   fields.text({ label, ...extra, validation: { isRequired: true } });
 
 const colors = () =>
-  fields.object(
-    {
-      bg: color("bg", "Fundo", "Cor de fundo da hero."),
-      blob: color("blob", "Mancha", "Mancha desfocada atrás da capa."),
-      accent: color("accent", "Destaque", "Botão, borda da miniatura e enfeites."),
-      ink: color("ink", "Texto", "Cor dos textos."),
-    },
-    { label: "Cores" },
+  capaColors(
+    fields.object(
+      {
+        bg: color("bg", "Fundo", "Cor de fundo da hero."),
+        blob: color("blob", "Mancha", "Mancha desfocada atrás da capa."),
+        accent: color("accent", "Destaque", "Botão, borda da miniatura e enfeites."),
+        ink: color("ink", "Texto", "Cor dos textos."),
+      },
+      { label: "Cores", description: "Preenchidas pela foto ao criar a capa. Ajuste à vontade ou clique em sugerir de novo." },
+    ),
   );
 
 export default config({

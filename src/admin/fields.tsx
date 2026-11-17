@@ -1,11 +1,13 @@
 import { fields } from "@keystatic/core";
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { formatPriceInput, maskPrice, PRICE_REGEX, priceToCents } from "../data/price";
-import { MAX_UPLOAD_MB, uploadError } from "../data/uploads";
+import { uploadError } from "../data/uploads";
 import type { Home } from "../data/home";
 import { CUSTOM_ID, type SiteDraft } from "../data/preview";
-import { usePublishCapa, usePublishColor, usePublishHome, usePublishImage, usePublishSite } from "./draft";
+import { useDraft, usePublishCapa, usePublishColor, usePublishHome, usePublishImage, usePublishSite } from "./draft";
 import { ObjectFields, previewValue } from "./FormFields";
+import { optimizeImage } from "./optimizeImage";
+import { suggestPalette } from "./palette";
 import PreviewPanel from "./PreviewPanel";
 
 const HEX = /^#[0-9a-fA-F]{6}$/;
@@ -115,21 +117,44 @@ export function photo(label: string, publicPath = "../") {
     label,
     publicPath,
     validation: { isRequired: true },
-    description: `PNG ou WebP com fundo transparente, até ${MAX_UPLOAD_MB} MB. O site gera as versões otimizadas sozinho.`,
+    description: "De preferência com fundo transparente. Pode enviar em qualquer tamanho: a foto é convertida para WebP e compactada automaticamente.",
   });
   return {
     ...base,
     Input(props: Parameters<typeof base.Input>[0]) {
       usePublishImage(props.value);
-      const error = uploadError(props.value);
+      const [status, setStatus] = useState<{ busy?: boolean; error?: string; warning?: string }>({});
+      const latest = useRef(0);
+
+      const onChange = async (value: Parameters<typeof props.onChange>[0]) => {
+        const run = ++latest.current;
+        if (!value) {
+          setStatus({});
+          return props.onChange(value);
+        }
+        setStatus({ busy: true });
+        try {
+          const { upload, transparent } = await optimizeImage(value);
+          if (run !== latest.current) return;
+          props.onChange(upload);
+          setStatus(transparent ? {} : { warning: "Essa foto não tem fundo transparente; no site o fundo vai aparecer atrás da capa." });
+        } catch (e) {
+          if (run === latest.current) setStatus({ error: e instanceof Error ? e.message : "Não foi possível otimizar a foto." });
+        }
+      };
+
+      const error = status.error ?? uploadError(props.value);
+      const message = (color: string, text: string, role?: "alert") => (
+        <p role={role} style={{ color, fontFamily: "system-ui, sans-serif", fontSize: 14, marginTop: 8 }}>
+          {text}
+        </p>
+      );
       return (
         <>
-          <base.Input {...props} />
-          {error && (
-            <p role="alert" style={{ color: "#c0392b", fontFamily: "system-ui, sans-serif", fontSize: 14, marginTop: 8 }}>
-              {error}
-            </p>
-          )}
+          <base.Input {...props} onChange={onChange} />
+          {status.busy && message("inherit", "Otimizando a foto…")}
+          {error && message("#c0392b", error, "alert")}
+          {status.warning && message("#b7791f", status.warning)}
         </>
       );
     },
@@ -172,6 +197,71 @@ export function siteUrl(key: keyof SiteDraft, label: string, isRequired = true) 
     Input(props: Parameters<typeof base.Input>[0]) {
       usePublishSite(key, props.value ?? "");
       return <base.Input {...props} />;
+    },
+  };
+}
+
+const COLOR_KEYS = ["bg", "blob", "accent", "ink"] as const;
+
+/** Grupo de cores da capa, com sugestão automática a partir da foto enviada. */
+export function capaColors<F extends { kind: "object" }>(field: F) {
+  return {
+    ...field,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    Input(props: any) {
+      const image = useDraft().capa?.image ?? null;
+      const [status, setStatus] = useState<{ busy?: boolean; error?: string }>({});
+      const fieldsRef = useRef(props.fields);
+      fieldsRef.current = props.fields;
+
+      const suggest = useCallback(async (url: string) => {
+        setStatus({ busy: true });
+        try {
+          const palette = await suggestPalette(url);
+          COLOR_KEYS.forEach((key) => fieldsRef.current[key].onChange(palette[key]));
+          setStatus({});
+        } catch (e) {
+          setStatus({ error: e instanceof Error ? e.message : "Não foi possível sugerir as cores" });
+        }
+      }, []);
+
+      const allEmpty = COLOR_KEYS.every((key) => !props.fields[key].value);
+      useEffect(() => {
+        if (image && allEmpty) suggest(image);
+        // Só ao trocar a foto; preencher as cores não deve disparar de novo.
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+      }, [image]);
+
+      return (
+        <div style={{ display: "grid", gap: 16 }}>
+          <ObjectFields props={props} forceValidation={props.forceValidation} heading />
+          <div style={{ display: "flex", alignItems: "center", gap: 12, fontFamily: "system-ui, sans-serif", fontSize: 14 }}>
+            <button
+              type="button"
+              disabled={!image || status.busy}
+              onClick={() => image && suggest(image)}
+              style={{
+                font: "600 13px system-ui, sans-serif",
+                padding: "6px 12px",
+                borderRadius: 6,
+                border: "1px solid #d4d4d8",
+                background: "transparent",
+                color: "inherit",
+                opacity: image ? 1 : 0.5,
+                cursor: image ? "pointer" : "not-allowed",
+              }}
+            >
+              {status.busy ? "Analisando a foto…" : "Sugerir cores pela foto"}
+            </button>
+            {!image && <span style={{ opacity: 0.7 }}>Envie a foto primeiro.</span>}
+            {status.error && (
+              <span role="alert" style={{ color: "#c0392b" }}>
+                {status.error}
+              </span>
+            )}
+          </div>
+        </div>
+      );
     },
   };
 }
