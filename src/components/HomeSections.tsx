@@ -65,18 +65,50 @@ export default function HomeSections({ features, steps, testimonials, faq, site,
           <p className={eyebrowClass}>{testimonials.eyebrow}</p>
           <h2 id="depoimentos-titulo" className={titleClass}>{testimonials.title}</h2>
           {testimonials.text && <p className="mt-5 max-w-2xl text-lg leading-relaxed opacity-75">{testimonials.text}</p>}
-          <ul className="mt-14 gap-6 sm:columns-2 lg:columns-3">
+          <ul
+            id="depoimentos-lista"
+            data-carousel
+            tabIndex={0}
+            aria-label="Depoimentos de clientes"
+            className="-mx-6 mt-14 flex snap-x snap-mandatory scroll-px-6 items-start gap-6 sm:items-stretch overflow-x-auto overscroll-x-contain scroll-smooth px-6 pt-2 pb-10 [scrollbar-width:none] md:mx-0 md:scroll-px-0 md:px-0 [&::-webkit-scrollbar]:hidden"
+          >
             {testimonials.items.map((t, i) => (
-              <li key={i} className="mb-6 break-inside-avoid">
-                <figure className={`overflow-hidden rounded-3xl bg-white ${cardShadow}`}>
+              <li
+                key={i}
+                aria-label={`${i + 1} de ${testimonials.items.length}`}
+                className="w-[82%] shrink-0 snap-start sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)]"
+              >
+                <figure className={`flex flex-col overflow-hidden rounded-3xl bg-white sm:h-full ${cardShadow}`}>
                   {t.photo && (
-                    <img src={t.photo} alt="Capa da Ristau na foto enviada pela cliente" loading="lazy" decoding="async" className="w-full" />
+                    <img src={t.photo} alt="Capa da Ristau na foto enviada pela cliente" loading="lazy" decoding="async" className="aspect-[4/5] w-full object-cover" />
                   )}
-                  <blockquote className="p-6 leading-relaxed">“{t.text}”</blockquote>
+                  <blockquote
+                    className={
+                      t.photo ? "p-6 leading-relaxed" : "font-display flex flex-1 items-center p-8 text-2xl leading-snug font-bold"
+                    }
+                  >
+                    “{t.text}”
+                  </blockquote>
                 </figure>
               </li>
             ))}
           </ul>
+          <div className="mt-2 flex justify-end gap-3">
+            {(["prev", "next"] as const).map((dir) => (
+              <button
+                key={dir}
+                type="button"
+                data-carousel-button={dir}
+                aria-controls="depoimentos-lista"
+                aria-label={dir === "prev" ? "Depoimento anterior" : "Próximo depoimento"}
+                className="grid size-12 cursor-pointer place-items-center rounded-full border-2 border-current transition-colors hover:bg-white/50 disabled:cursor-default disabled:opacity-30 disabled:hover:bg-transparent md:size-14"
+              >
+                <svg viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                  <path d={dir === "prev" ? "M15 18l-6-6 6-6" : "M9 6l6 6-6 6"} />
+                </svg>
+              </button>
+            ))}
+          </div>
         </section>
 
         <section id="duvidas" aria-labelledby="duvidas-titulo" className="bg-white">
