@@ -14,3 +14,24 @@ const jsonLd = structuredData({ site, products, home, url: new URL("/", Astro.si
   <HeroSlider client:idle products={products} site={site} />
   <HomeSections {...home} site={site} products={products} />
 </Layout>
+
+<script>
+  for (const list of document.querySelectorAll<HTMLElement>("[data-carousel]")) {
+    const buttons = document.querySelectorAll<HTMLButtonElement>(`[aria-controls="${list.id}"][data-carousel-button]`);
+    const update = () => {
+      const end = list.scrollWidth - list.clientWidth - 1;
+      buttons.forEach((b) => (b.disabled = b.dataset.carouselButton === "prev" ? list.scrollLeft <= 0 : list.scrollLeft >= end));
+    };
+    buttons.forEach((b) =>
+      b.addEventListener("click", () => {
+        const item = list.firstElementChild as HTMLElement | null;
+        if (!item) return;
+        const step = item.offsetWidth + parseFloat(getComputedStyle(list).columnGap || "0");
+        const perPage = Math.max(1, Math.round(list.clientWidth / step));
+        list.scrollBy({ left: (b.dataset.carouselButton === "prev" ? -1 : 1) * perPage * step });
+      }),
+    );
+    list.addEventListener("scroll", update, { passive: true });
+    update();
+  }
+</script>
