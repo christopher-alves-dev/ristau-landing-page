@@ -13,11 +13,11 @@ describe("uploadError", () => {
     expect(uploadError(null)).toBeNull();
   });
 
-  it("recusa formatos sem transparência ou não otimizáveis", () => {
-    for (const ext of ["jpg", "jpeg", "heic", "gif"]) expect(uploadError(file(ext, 0.1))).toMatch(/não aceito/);
+  it("recusa formatos que escaparam da conversão para WebP", () => {
+    for (const ext of ["jpg", "jpeg", "heic", "gif"]) expect(uploadError(file(ext, 0.1))).toMatch(/não foi otimizada/);
   });
 
   it("recusa fotos acima do limite", () => {
-    expect(uploadError(file("png", MAX_UPLOAD_MB + 0.5))).toMatch(`limite é ${MAX_UPLOAD_MB} MB`);
+    expect(uploadError(file("png", MAX_UPLOAD_MB + 0.5))).toMatch(/não foi otimizada/);
   });
 });
